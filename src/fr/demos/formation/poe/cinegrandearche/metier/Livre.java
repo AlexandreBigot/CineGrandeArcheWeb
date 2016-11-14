@@ -1,4 +1,4 @@
-package fr.demos.formation.poe.CineGrandeAche;
+package fr.demos.formation.poe.cinegrandearche.metier;
 
 import java.time.LocalDate;
 

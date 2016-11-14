@@ -1,6 +1,10 @@
-package fr.demos.formation.poe.CineGrandeAche;
+package fr.demos.formation.poe.cinegrandearche.metier;
 
 import java.util.ArrayList;
+
+import fr.demos.formation.poe.cinegrandearche.exceptions.ExceptionQuantiteDemandeeSuperieureAuStock;
+import fr.demos.formation.poe.cinegrandearche.exceptions.ExceptionRetirerArticleAbsentDuPanier;
+import fr.demos.formation.poe.cinegrandearche.exceptions.ExceptionRetirerArticlePanier;
 
 public class Panier {
 	
