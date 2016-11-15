@@ -4,3 +4,7 @@ parcourrir l'arraylist dans la jsppour afficher les articles dans la page articl
 
 pour la session on va créer un paramètre dans un boolean et chager le boolean si on a cliqué sur le bouton connection
 puis suivant la valeur du boolean on affiche le champs de connction ou le bouton pour accéder à la page compte
+
+
+vérif la méthode retirer article du stock, on en a besoin après validation commande
+
