@@ -1,0 +1,6 @@
+mettre les livres dans une arraylist dans controlerarticles (pas trop non plus on va tous les afficher sans test)
+parcourrir l'arraylist dans la jsppour afficher les articles dans la page articles
+
+
+pour la session on va créer un paramètre dans un boolean et chager le boolean si on a cliqué sur le bouton connection
+puis suivant la valeur du boolean on affiche le champs de connction ou le bouton pour accéder à la page compte

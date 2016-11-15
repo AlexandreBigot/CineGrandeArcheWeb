@@ -9,14 +9,14 @@ public class MainCineGrandeArche {
 	public static void main(String[] args) {
 
 		//livre standard matériel neuf
-		Livre l1 = new Livre("refDuLivreL1", 20.00, "nomL1", 10, "auteur de 1l", "isbn de l1", "editeur de l1");
+		Livre l1 = new Livre("refDuLivreL1", 20.00, "nomL1", 10, "auteur de 1l", "isbn de l1", "editeur de l1", "genre de l1");
 		System.out.println(l1);
 		
 		//livre dématerialise
 		Livre l2 = new Livre("ref du livre l2", 15, "nomL2", "format l2", "URL telechargement l2",
 				"auteur l2", "isbn l2", "editeur l2", "genre l2");
 		
-//		ArticleDivers ad1 = new ArticleDivers("ref de l'article ad1", 15.00, "nom AD1", "Format PDF", "URL de ad1", "Affiche", "est une affiche du film machin truc");
+	//	ArticleDivers ad1 = new ArticleDivers("ref de l'article ad1", 15.00, "nom AD1", "Format PDF", "URL de ad1", "Affiche", "est une affiche du film machin truc");
 	//	System.out.println(ad1);
 
 		Panier p1 = new Panier();

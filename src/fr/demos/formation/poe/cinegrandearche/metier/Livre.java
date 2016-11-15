@@ -22,32 +22,34 @@ public class Livre extends Article {
 	
 	// constructeur livre matérialisé neuf
 	public Livre(String argRef, double argPrixHt, String argNom, int argStock, String argAuteur,
-			String argIsbn, String argEditeur) {
+			String argIsbn, String argEditeur, String argGenre) {
 		super(argRef, argPrixHt, argNom, argStock);
 		this.auteur = argAuteur;
 		this.isbn = argIsbn;
 		this.editeur = argEditeur;
+		this.genre = argGenre;
 	}
 
 	// constructeur livre matérialisé non neuf
 	public Livre(String argRef, double argPrixHt, String argNom, int argStock,  Etat argEtat, String argAuteur,
-			String argIsbn, String argEditeur) {
+			String argIsbn, String argEditeur, String argGenre) {
 		super(argRef, argPrixHt, argNom, argStock, argEtat);
 		this.auteur = argAuteur;
 		this.isbn = argIsbn;
 		this.editeur = argEditeur;
+		this.genre = argGenre;
 	}
 
 	@Override
 	public String toString() {
-		if (this.isDematerialise()){		
-		return "Livre [auteur=" + auteur + ", isbn=" + isbn + ", editeur=" + editeur + ", genre=" + genre + ", date="
+		if (super.getMateriel() == null){		
+		return "Livre Dématérialisé [auteur=" + auteur + ", isbn=" + isbn + ", editeur=" + editeur + ", genre=" + genre + ", date="
 				+ date + ", getPrixHt()=" + getPrixHt() + ", getRef()=" + getRef() + ", getNom()=" + getNom()
-				+ ", non matérialisé" + ", getFormat()=" + getFormat() + "]";
+				+ ", getFormat()=" + super.getImmateriel().getFormat() + ", getUrlDownload()="+ super.getImmateriel().getUrlDownload() + "]";
 		} else {
-		return "Livre [auteur=" + auteur + ", isbn=" + isbn + ", editeur=" + editeur + ", genre=" + genre + ", date="
+		return "Livre matériel [auteur=" + auteur + ", isbn=" + isbn + ", editeur=" + editeur + ", genre=" + genre + ", date="
 				+ date + ", PrixHt=" + getPrixHt() + ", Ref=" + getRef() + ", Nom=" + getNom()
-				+ ", matérialisé" + ", Stock=" + getStock() + ", Etat=" + getEtat() + "]";
+				+ ", matérialisé" + ", Stock=" + getStock() + ", Etat=" + super.getMateriel().getEtat() + "]";
 		}
 	}//toString
 

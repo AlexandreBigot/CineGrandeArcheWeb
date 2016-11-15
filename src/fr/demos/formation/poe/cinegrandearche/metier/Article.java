@@ -7,71 +7,63 @@ public abstract class Article {
 	private String nom;
 	private String description;
 	private String urlImage;
-	private boolean dematerialise;
-	// si dematerialise = true
-	private String format;
-	private String urlDownload;
-	// si dematerialise = false
+//	private boolean dematerialise;
+	private Materialise materiel;
+	private Dematerialise immateriel;
 	private int stock;
-	private Etat etat;
 
 	// constructeur si dématérialisé pdf, iso, exe... (appel avec arguments
-	// format et urlDownload)
 	public Article(String argRef, double argPrixHt, String argNom, String argFormat, String argUrlDownload) {
 		super();
-		this.dematerialise = true;
 		this.ref = argRef;
 		this.prixHt = argPrixHt;
 		this.nom = argNom;
-		this.format = argFormat;
-		this.urlDownload = argUrlDownload;
+		this.stock = 1;
+		this.immateriel = new Dematerialise(argFormat, argUrlDownload);
 	}
 
 	// constructeur si matérialisé et neuf car 80% de l'activité = livres neufs
 	public Article(String argRef, double argPrixHt, String argNom, int argStock) {
 		super();
-		this.dematerialise = false;
 		this.ref = argRef;
 		this.prixHt = argPrixHt;
 		this.nom = argNom;
 		this.stock = argStock;
-		this.etat = Etat.NEUF;
+		this.materiel = new Materialise(Etat.NEUF);
 	}
 
 	// constructeur si matérialisé livre, dvd, cd... (appel avec arguments stock
 	// et etat)
 	public Article(String argRef, double argPrixHt, String argNom, int argStock, Etat argEtat) {
 		super();
-		this.dematerialise = false;
 		this.ref = argRef;
 		this.prixHt = argPrixHt;
 		this.nom = argNom;
 		this.stock = argStock;
-		this.etat = argEtat;
+		this.materiel = new Materialise(argEtat);
 	}
-
+	
 	@Override
 	public String toString() {
-		if (this.isDematerialise()){
-			return "Article [ref=" + ref + ", prixHt=" + prixHt + ", nom=" + nom + ", non matérialisé"
-					+ ", format=" + format + "]";
+		return "Article [ref=" + ref + ", prixHt=" + prixHt + ", nom=" + nom + ", description=" + description
+				+ ", urlImage=" + urlImage + ", materiel=" + materiel + ", immateriel=" + immateriel + ", stock="
+				+ stock + "]";
+	}
 
-		} else {
-		
-		return "Article [ref=" + ref + ", prixHt=" + prixHt + ", nom=" + nom + ", matérialisé"
-				+ ", stock=" + stock + ", etat=" + etat + "]";
-		}
-	}	
-
+	//METHODE INUTILE POUR LE MOMENT
 	public void addStock(int quantite) {
-		if (!this.isDematerialise()) {
+		if (this.immateriel == null) {
 			this.stock = this.stock + quantite;
+		} else {
+			// exception "ça rime à rien d'ajouter un article immateriel !!!" ADMINISTRATION
 		}
 	}// addStock
 
+	//METHODE INUTILE POUR LE MOMENT
 	public void removeStock(int quantite) {
-		if (!this.isDematerialise()) { // si dematérialisé est false
-			if (this.stock == 0) {
+		if (this.immateriel == null) { // si dematérialisé est false
+			if (this.stock == 0) { // si stock null
+				// exception "on ne peut rien retirer de zero stock" ADMINISTRATION
 			} else {
 				this.stock = this.stock - quantite;
 			}
@@ -119,29 +111,13 @@ public abstract class Article {
 		this.urlImage = urlImage;
 	}
 
-	public String getUrlDownload() {
-		return urlDownload;
-	}
-
-	public void setUrlDownload(String urlDownload) {
-		this.urlDownload = urlDownload;
-	}
-
 	public int getStock() {
-		if (this.isDematerialise()){ // si dématerialisé, pas de stock à gérer, "1 valeur finale"
+		if (this.materiel == null){ // si dématerialisé, pas de stock à gérer, "1 valeur finale"
 			return 1;
 		} else {
-		return stock;
+		return stock;	
 		}
 	}	
-
-	public Etat getEtat() {
-		return etat;
-	}
-
-	public void setEtat(Etat etat) {
-		this.etat = etat;
-	}
 
 	public String getRef() {
 		return ref;
@@ -151,12 +127,18 @@ public abstract class Article {
 		return nom;
 	}
 
-	public boolean isDematerialise() {
-		return dematerialise;
+	public Materialise getMateriel() {
+		return materiel;
 	}
 
-	public String getFormat() {
-		return format;
+	public Dematerialise getImmateriel() {
+		return immateriel;
 	}
+
+//	public boolean isDematerialise() {
+//		return dematerialise;
+//	}
+
+	
 
 } // class

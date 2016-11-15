@@ -10,7 +10,7 @@ public class Panier {
 	
 //	private Compte compte;
 //	relier un panier à une session ou un compte
-	ArrayList<LignePanier> lignesPanier = new ArrayList<LignePanier>();
+	private ArrayList<LignePanier> lignesPanier = new ArrayList<LignePanier>();
 	
 	public double getPrixTotal(){
 		double prixTotal=0;
@@ -26,7 +26,7 @@ public class Panier {
 		if (quantite <= a.getStock()){
 			lignesPanier.add(new LignePanier(a, quantite));
 		} else { // si quantite demandée supérieure au stock
-			if (a.isDematerialise()){ // si dématerialise on s'en fiche c'est illimité
+			if (a.getMateriel() == null){ // si dématerialise on s'en fiche c'est illimité
 				lignesPanier.add(new LignePanier(a, quantite));
 			} else { // si matérialisé stock insuffisant
 				throw new ExceptionQuantiteDemandeeSuperieureAuStock("Le stock n'est pas suffisant, nombre d'articles en stock : ", a.getStock());
@@ -45,7 +45,7 @@ public class Panier {
 						lignesPanier.get(indexDeMaLigne).getQuantite() + quantiteAjoutée);
 			} else { // si quantite demandée supérieure au stock
 				 // si dématerialise on s'en fiche c'est illimité
-				if (a.isDematerialise()){
+				if (a.getMateriel() == null){
 					lignesPanier.get(indexDeMaLigne).setQuantite(
 							lignesPanier.get(indexDeMaLigne).getQuantite() + quantiteAjoutée);
 				} else { // si matérialisé et stock insuffisant
@@ -68,17 +68,18 @@ public class Panier {
 	public void retirerUnArticle(Article a, int quantiteRetiree) throws ExceptionRetirerArticlePanier, ExceptionRetirerArticleAbsentDuPanier{
 		LignePanier lp1 = new LignePanier(a, quantiteRetiree);
 		int indexDeMaLigne = lignesPanier.indexOf(lp1);
+		int quantiteLigne = lignesPanier.get(indexDeMaLigne).getQuantite();
 		if (indexDeMaLigne != -1){
-			if (quantiteRetiree == lignesPanier.get(indexDeMaLigne).getQuantite()){
+			if (quantiteRetiree == quantiteLigne) {
 				this.supprimerLignePanier(indexDeMaLigne);
 			}
-			else if (quantiteRetiree > lignesPanier.get(indexDeMaLigne).getQuantite()){
+			else if (quantiteRetiree > quantiteLigne){
 				throw new ExceptionRetirerArticlePanier(
 					"Vous essayez de retirer trop d'exemplaires de cet article, quantité dans le panier = ",
-					lignesPanier.get(indexDeMaLigne).getQuantite());
+					quantiteLigne);
 			}
-			else if (quantiteRetiree < lignesPanier.get(indexDeMaLigne).getQuantite()) {
-				int nouvelleQuantite = lignesPanier.get(indexDeMaLigne).getQuantite() - quantiteRetiree;
+			else if (quantiteRetiree < quantiteLigne) {
+				int nouvelleQuantite = quantiteLigne - quantiteRetiree;
 				lignesPanier.get(indexDeMaLigne).setQuantite(nouvelleQuantite);	
 			}
 		} else {
