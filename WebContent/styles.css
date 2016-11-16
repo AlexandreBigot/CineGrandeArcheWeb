@@ -1,6 +1,49 @@
-@CHARSET "ISO-8859-1";
+@CHARSET "UTF-8";
 
+body{
+/*	background-color: #CECEF6;*/
+	background-color: #E0E6F8
+}
 
+/* centrage du site*/
+body > div:first-child{
+	max-width:960px;
+	margin:auto;
+	background-color: white;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow:#464040 0px 0px 15px;
+}
 
+.article{
+	border-top: darkred solid 2px;
+	
+}
+
+.imageEtInfos{
+	display: flex;
+	background-color: lightgrey;
+	border-top: darkgrey solid 3px;
+	border-bottom: darkgrey solid 3px;
+	
+}
+
+.imageArticle{
+	width: 15%;
+}
+
+.imageArticle img{
+	width: 100%;
+	margin: 10px;
+}
+
+.infosArticle{
+	width: 70%;
+}
+
+.descriptionArticle{
+	width: 90%;
+	flex-direction: column;
+}
 
 

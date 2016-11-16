@@ -1,37 +1,61 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="styles.css" />
 <title>Articles</title>
 </head>
 <body>
-<header>
-<jsp:include page="/Menu.jsp"></jsp:include>
-</header>
-<div>
-<ul>
-<li>Nom de l'article : ${livre1.nom}</li>
-<li>Référence de l'article : ${livre1.ref}</li>
-<c:if test="${not empty livre1.materiel}">
-<li>Etat de l'article : ${livre1.materiel.etat}</li>
-<li>Quantité disponible : ${livre1.stock}</li>
-</c:if> 
-<c:if test="${not empty immateriel}">
-<li>Format de l'article : ${formatArticle}</li>
-<li>Adresse de téléchargement de l'article : ${urlArticle}</li>
-</c:if>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-<li></li>
-</ul>
-</div>
+	<div class="divbody">
+		<header>
+			<jsp:include page="/Menu.jsp"></jsp:include>
+		</header>
+		<br /> <br />
+
+		<c:forEach var="article" items="${catalogue}">
+			<div class="article">
+				<br/>${article.nom}<br /> <br />
+				<div class="imageEtInfos">
+					<div class="imageArticle">
+						<img src="<c:url value='${article.urlImage}'/>" />
+					</div>
+					<!-- si article dÃ©matÃ©rialisÃ© -->
+					<c:if test="${empty article.materiel}">
+						<div class="infosArticle">
+							<ul>
+								<li>Auteur : ${article.auteur}</li>
+								<li>Prix HT : <fmt:formatNumber value="${article.prixHt}" minFractionDigits="2" /> â‚¬</li>
+								<li>Format numÃ©rique : ${article.immateriel.format}</li>
+							</ul>
+						</div>
+					</c:if>
+
+					<!-- si article matÃ©riel -->
+					<c:if test="${empty article.immateriel}">
+						<div class="infosArticle">
+							<ul>
+								<li>Auteur : ${article.auteur}</li>
+								<li>Etat : ${article.materiel.etat}</li>
+								<li>Prix HT : <fmt:formatNumber value="${article.prixHt}" minFractionDigits="2" /> â‚¬</li>
+								<li>QuantitÃ© disponible : ${article.stock}</li>
+							</ul>
+						</div>
+					</c:if>
+
+				</div>
+				<br /> Description : <br />
+				<div class="descriptionArticle">${article.description}</div>
+				<br />
+			</div>
+		</c:forEach>
 
 
+	</div>
 </body>
 </html>

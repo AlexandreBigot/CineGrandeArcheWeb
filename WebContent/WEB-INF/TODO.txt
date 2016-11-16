@@ -1,5 +1,3 @@
-mettre les livres dans une arraylist dans controlerarticles (pas trop non plus on va tous les afficher sans test)
-parcourrir l'arraylist dans la jsppour afficher les articles dans la page articles
 
 
 pour la session on va créer un paramètre dans un boolean et chager le boolean si on a cliqué sur le bouton connection

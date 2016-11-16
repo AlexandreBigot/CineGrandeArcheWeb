@@ -6,25 +6,25 @@ public class ArticleDivers extends Article {
 	private String caracteristiques;
 
 	// constructeur article divers dématérialisé
-	public ArticleDivers(String argRef, double argPrixHt, String argNom, String argFormat, String argUrlDownload,
+	public ArticleDivers(String argRef, double argPrixHt, String argNom, String argUrlImage, String argFormat, String argUrlDownload,
 			String type, String caracteristiques) {
-		super(argRef, argPrixHt, argNom, argFormat, argUrlDownload);
+		super(argRef, argPrixHt, argNom, argUrlImage, argFormat, argUrlDownload);
 		this.type = type;
 		this.caracteristiques = caracteristiques;
 	}
 
 	// constructeur article divers matérialisé neuf
-	public ArticleDivers(String argRef, double argPrixHt, String argNom, int argStock, String type,
+	public ArticleDivers(String argRef, double argPrixHt, String argNom, String argUrlImage, int argStock, String type,
 			String caracteristiques) {
-		super(argRef, argPrixHt, argNom, argStock);
+		super(argRef, argPrixHt, argNom, argUrlImage, argStock);
 		this.type = type;
 		this.caracteristiques = caracteristiques;
 	}
 
 	// constructeur article divers matérialisé non neuf
-	public ArticleDivers(String argRef, double argPrixHt, String argNom, int argStock, Etat argEtat, String type,
+	public ArticleDivers(String argRef, double argPrixHt, String argNom, String argUrlImage, int argStock, Etat argEtat, String type,
 			String caracteristiques) {
-		super(argRef, argPrixHt, argNom, argStock, argEtat);
+		super(argRef, argPrixHt, argNom, argUrlImage, argStock, argEtat);
 		this.type = type;
 		this.caracteristiques = caracteristiques;
 	}

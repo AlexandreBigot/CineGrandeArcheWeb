@@ -11,9 +11,9 @@ public class Livre extends Article {
 	private LocalDate date;
 	
 	// constructeur livre dématérialisé
-	public Livre(String argRef, double argPrixHt, String argNom, String argFormat, String argUrlDownload, String argAuteur,
+	public Livre(String argRef, double argPrixHt, String argNom, String argUrlImage, String argFormat, String argUrlDownload, String argAuteur,
 			String argIsbn, String argEditeur, String argGenre) {
-		super(argRef, argPrixHt, argNom, argFormat, argUrlDownload);
+		super(argRef, argPrixHt, argNom, argUrlImage, argFormat, argUrlDownload);
 		this.auteur = argAuteur;
 		this.isbn = argIsbn;
 		this.editeur = argEditeur;
@@ -21,9 +21,9 @@ public class Livre extends Article {
 	}
 	
 	// constructeur livre matérialisé neuf
-	public Livre(String argRef, double argPrixHt, String argNom, int argStock, String argAuteur,
+	public Livre(String argRef, double argPrixHt, String argNom, String argUrlImage, int argStock, String argAuteur,
 			String argIsbn, String argEditeur, String argGenre) {
-		super(argRef, argPrixHt, argNom, argStock);
+		super(argRef, argPrixHt, argNom, argUrlImage, argStock);
 		this.auteur = argAuteur;
 		this.isbn = argIsbn;
 		this.editeur = argEditeur;
@@ -31,9 +31,9 @@ public class Livre extends Article {
 	}
 
 	// constructeur livre matérialisé non neuf
-	public Livre(String argRef, double argPrixHt, String argNom, int argStock,  Etat argEtat, String argAuteur,
+	public Livre(String argRef, double argPrixHt, String argNom, String argUrlImage, int argStock,  Etat argEtat, String argAuteur,
 			String argIsbn, String argEditeur, String argGenre) {
-		super(argRef, argPrixHt, argNom, argStock, argEtat);
+		super(argRef, argPrixHt, argNom, argUrlImage, argStock, argEtat);
 		this.auteur = argAuteur;
 		this.isbn = argIsbn;
 		this.editeur = argEditeur;
@@ -45,11 +45,13 @@ public class Livre extends Article {
 		if (super.getMateriel() == null){		
 		return "Livre Dématérialisé [auteur=" + auteur + ", isbn=" + isbn + ", editeur=" + editeur + ", genre=" + genre + ", date="
 				+ date + ", getPrixHt()=" + getPrixHt() + ", getRef()=" + getRef() + ", getNom()=" + getNom()
-				+ ", getFormat()=" + super.getImmateriel().getFormat() + ", getUrlDownload()="+ super.getImmateriel().getUrlDownload() + "]";
+				+ ", getUrlImage()=" + getUrlImage() + ", getFormat()=" + super.getImmateriel().getFormat() + ", getUrlDownload()=" 
+				+ super.getImmateriel().getUrlDownload() + "]";
 		} else {
 		return "Livre matériel [auteur=" + auteur + ", isbn=" + isbn + ", editeur=" + editeur + ", genre=" + genre + ", date="
 				+ date + ", PrixHt=" + getPrixHt() + ", Ref=" + getRef() + ", Nom=" + getNom()
-				+ ", matérialisé" + ", Stock=" + getStock() + ", Etat=" + super.getMateriel().getEtat() + "]";
+				+ ", getUrlImage()=" + getUrlImage() + ", matérialisé" + ", Stock=" + getStock() + ", Etat=" 
+				+ super.getMateriel().getEtat() + "]";
 		}
 	}//toString
 

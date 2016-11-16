@@ -13,32 +13,35 @@ public abstract class Article {
 	private int stock;
 
 	// constructeur si dématérialisé pdf, iso, exe... (appel avec arguments
-	public Article(String argRef, double argPrixHt, String argNom, String argFormat, String argUrlDownload) {
+	public Article(String argRef, double argPrixHt, String argNom, String argUrlImage, String argFormat, String argUrlDownload) {
 		super();
 		this.ref = argRef;
 		this.prixHt = argPrixHt;
 		this.nom = argNom;
+		this.urlImage = argUrlImage;
 		this.stock = 1;
 		this.immateriel = new Dematerialise(argFormat, argUrlDownload);
 	}
 
 	// constructeur si matérialisé et neuf car 80% de l'activité = livres neufs
-	public Article(String argRef, double argPrixHt, String argNom, int argStock) {
+	public Article(String argRef, double argPrixHt, String argNom, String argUrlImage, int argStock) {
 		super();
 		this.ref = argRef;
 		this.prixHt = argPrixHt;
 		this.nom = argNom;
+		this.urlImage = argUrlImage;
 		this.stock = argStock;
 		this.materiel = new Materialise(Etat.NEUF);
 	}
 
 	// constructeur si matérialisé livre, dvd, cd... (appel avec arguments stock
 	// et etat)
-	public Article(String argRef, double argPrixHt, String argNom, int argStock, Etat argEtat) {
+	public Article(String argRef, double argPrixHt, String argNom, String argUrlImage, int argStock, Etat argEtat) {
 		super();
 		this.ref = argRef;
 		this.prixHt = argPrixHt;
 		this.nom = argNom;
+		this.urlImage = argUrlImage;
 		this.stock = argStock;
 		this.materiel = new Materialise(argEtat);
 	}
