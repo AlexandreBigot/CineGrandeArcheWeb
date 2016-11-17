@@ -20,7 +20,19 @@
 
 		<c:forEach var="article" items="${catalogue}">
 			<div class="article">
-				<br/>${article.nom}<br /> <br />
+				<br/>
+				<div class="headerArticle">
+					<div id="nomArticle" class="contenuHeaderArticle">${article.nom}</div>
+					<div id="formAjoutPanier" class="contenuHeaderArticle">
+						<form action="">
+						<input type="text" value="${article.ref}" name="refArticle">
+						<label for="nom">Quantité :</label>
+						<input class="champsAjoutPanier" type="number" value="1" min="1" name="quantiteAjouteePanier"/>
+						<input type=submit value="Ajouter au panier" name="action"/>
+						</form>					
+					</div>
+				</div>
+				<br/>
 				<div class="imageEtInfos">
 					<div class="imageArticle">
 						<img src="<c:url value='${article.urlImage}'/>" />

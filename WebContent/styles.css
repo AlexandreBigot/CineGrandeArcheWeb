@@ -6,7 +6,7 @@ body{
 }
 
 /* centrage du site*/
-body > div:first-child{
+.divbody{
 	max-width:960px;
 	margin:auto;
 	background-color: white;
@@ -15,9 +15,37 @@ body > div:first-child{
 	box-shadow:#464040 0px 0px 15px;
 }
 
+li{
+	list-style-type: none;
+}
+
+header{
+	display: flex;
+	justify-content: space-around;
+}
+
+.menu{
+	width: 100%;
+	display: flex;
+}
+
+.elementMenu{
+	display: flex;
+	justify-content: space-around;
+}
+
+
 .article{
-	border-top: darkred solid 2px;
-	
+	border-top: darkred solid 2px;	
+}
+
+.headerArticle{
+	display: flex;
+	justify-content: space-between;
+}
+
+.champsAjoutPanier{
+	width: 40px;
 }
 
 .imageEtInfos{

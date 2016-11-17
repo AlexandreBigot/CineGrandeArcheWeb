@@ -1,24 +1,42 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<div id="menu">
-<c:if test="${connect==true}"><!-- si non connecté à un compte -->
-<form id="formConnection" method="post" action="ControlerCompte">
-<label for="nom">Nom d'utilisateur :</label>
-<input type="text" value="${param.nomUtilisateur}" name="nomUtilisateur"/>
-<label for="password">Mot de passe :</label>
-<input type="password" value="${param.motDePasse}" name="motDePasse"/>
-<input type=submit value="connection" name="action"/>
-</form>
-</c:if>
-<c:if test=""><!-- si connecté -->
-<form id="formPageCompte" method="POST" action="/Compte.jsp">
-<input type=submit name="compte" value="Voir le compte" >
-</form>
-</c:if>
-<form id="formPagePanier" method="POST" action="/Panier.jsp">
-<input type=submit name="panier" value="Voir le panier" >
-</form>
+<div class="menu">
+
+	<div class="elementMenu">
+		<c:if test="${!connecteAuCompte}">
+			<!-- si non connectÃ© Ã  un compte -->
+			<form id="formConnectionCompte" method="post" action="ControlerCompte">
+				<label for="nom">Nom d'utilisateur</label> <br /> <input type="text"
+					value="${param.nomUtilisateur}" name="nomUtilisateur" /> <br /> <label
+					for="password">Mot de passe</label> <br /> <input type="password"
+					value="${param.motDePasse}" name="motDePasse" /> <br />
+				<br /> <input type=submit value="Connection" name="action" />
+			</form>
+		</c:if>
+	</div>
+
+	<div class="elementMenu">
+		<c:if test="${connecteAuCompte}">
+			<!-- si connectÃ© -->
+			<form id="formPageCompte" method="POST" action="ControlerCompte">
+				<input type=submit name="compte" value="Voir le compte">
+			</form>
+		</c:if>
+	</div>
+
+	<div class="elementMenu">
+		<form id="formCreerCompte" method="POST" action="/CreerCompte.jsp">
+			<input type=submit name="creerCompte" value="CrÃ©er un Compte">
+		</form>
+	</div>
+
+	<div class="elementMenu">
+		<form id="formPagePanier" method="POST" action="/Panier.jsp">
+			<input type=submit name="panier" value="Voir le panier">
+		</form>
+	</div>
+
 </div>
-    
-    
+
