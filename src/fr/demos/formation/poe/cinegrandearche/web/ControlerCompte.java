@@ -21,6 +21,8 @@ public class ControlerCompte extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -29,9 +31,17 @@ public class ControlerCompte extends HttpServlet {
 		rd.forward(request, response);
 	}
 
+	
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		// je dis à tomcat d'utiliser les accente et caractères spéciaux
+		request.setCharacterEncoding("UTF-8");
+		
+		// j'identifie et je stocke la session actuelle
+		HttpSession session = request.getSession();
+		
 		// je stocke le paramètre de requete (le name du bouton)
 		String action = request.getParameter("action");
 
@@ -40,8 +50,6 @@ public class ControlerCompte extends HttpServlet {
 		if (action != null && action.equals("Connection")) {
 			connecteAuCompte = true;
 
-			// j'identifie et je stocke la session actuelle
-			HttpSession session = request.getSession();
 			// je mets mon boolean connecteAuCompte en attribut de session pour
 			// pouvoir utiliser EL
 			session.setAttribute("connecteAuCompte", connecteAuCompte);
@@ -49,12 +57,38 @@ public class ControlerCompte extends HttpServlet {
 			// je récupère la requête et je renvoie vers la JSP
 			RequestDispatcher rd = request.getRequestDispatcher("/Articles.jsp");
 			rd.forward(request, response);
-
 		} // if bouton connection
+		
+		
+		
+		// if bouton voir le compte
+		if (connecteAuCompte && action != null && action.equals("Voir le compte")) {
+			// je récupère la requête et je renvoie vers la JSP
+			RequestDispatcher rd = request.getRequestDispatcher("/GestionCompte.jsp");
+			rd.forward(request, response);
+		} // if bouton Voir le compte
+		
+		
+		
+		
+		// if bouton Se déconnecter
+		if (connecteAuCompte && action != null && action.equals("Se déconnecter")) {
+			// je récupère la requête et je renvoie vers la JSP
+			RequestDispatcher rd = request.getRequestDispatcher("/GestionCompte.jsp");
+			rd.forward(request, response);
+		} // if bouton Se déconnecter
+		
+		
+		
+		
+		// if bouton Créer un Compte	
+		if (action != null && action.equals("Créer un compte")) {
+			System.out.println("j'ai cliqué sur créer un compte");
+			// je récupère la requête et je renvoie vers la JSP
+			RequestDispatcher rd = request.getRequestDispatcher("/CreerCompte.jsp");
+			rd.forward(request, response);
+		} // if bouton Créer un Compte
 
-		// écouter le bouton connection et si champs pas vides changer
-		// connecteAuCompte en true et modifier affichage : bouton pour accéder
-		// au compte
 
 	} // do post
 

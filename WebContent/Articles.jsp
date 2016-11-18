@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
@@ -24,15 +23,27 @@
 				<div class="headerArticle">
 					<div id="nomArticle" class="contenuHeaderArticle">${article.nom}</div>
 					<div id="formAjoutPanier" class="contenuHeaderArticle">
-						<form action="">
-						<input type="text" value="${article.ref}" name="refArticle">
-						<label for="nom">Quantité :</label>
-						<input class="champsAjoutPanier" type="number" value="1" min="1" name="quantiteAjouteePanier"/>
+						<form action="ControlerPanier" method="post">
+						<input type="hidden" value="${article.ref}" name="refArticle">
+							<c:if test="${empty article.immateriel}">
+								<label for="nom">Quantité :</label>
+								<input class="champsAjoutPanier" type="number" value="1" min="1" name="quantiteAjouteePanier"/>
+							</c:if>
+							<c:if test="${empty article.materiel}">
+								<label for="nom">Quantité : 1</label>
+								<input class="champsAjoutPanier" type="hidden" value="1" name="quantiteAjouteePanier"/>
+							</c:if>
 						<input type=submit value="Ajouter au panier" name="action"/>
 						</form>					
 					</div>
 				</div>
 				<br/>
+				<c:if test="${referenceArticlePanier == article.ref}">
+				<div class="messageException">
+					${ExceptionQuantiteDemandeeSuperieureAuStock}
+				</div>
+				<br/>
+				</c:if>
 				<div class="imageEtInfos">
 					<div class="imageArticle">
 						<img src="<c:url value='${article.urlImage}'/>" />

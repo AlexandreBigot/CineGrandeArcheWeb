@@ -2,15 +2,15 @@ package fr.demos.formation.poe.cinegrandearche.exceptions;
 
 public class ExceptionQuantiteDemandeeSuperieureAuStock extends Exception {
 
-	private int quantiteDepassement;
+	private int stockArticle;
 
-	public ExceptionQuantiteDemandeeSuperieureAuStock(String message, int quantiteDepassement) {
+	public ExceptionQuantiteDemandeeSuperieureAuStock(String message, int stockArticle) {
 		super(message);
-		this.quantiteDepassement = quantiteDepassement;
+		this.stockArticle = stockArticle;
 	}
 	
-	public int getQuantiteDepassement(){
-		return quantiteDepassement;
+	public int getQuantiteStock(){
+		return stockArticle;
 	}
 	
 }

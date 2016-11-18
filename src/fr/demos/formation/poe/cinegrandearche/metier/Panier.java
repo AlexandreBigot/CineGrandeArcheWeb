@@ -1,12 +1,13 @@
 package fr.demos.formation.poe.cinegrandearche.metier;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import fr.demos.formation.poe.cinegrandearche.exceptions.ExceptionQuantiteDemandeeSuperieureAuStock;
 import fr.demos.formation.poe.cinegrandearche.exceptions.ExceptionRetirerArticleAbsentDuPanier;
 import fr.demos.formation.poe.cinegrandearche.exceptions.ExceptionRetirerArticlePanier;
 
-public class Panier {
+public class Panier implements Iterable<LignePanier> {
 	
 //	private Compte compte;
 //	relier un panier à une session ou un compte
@@ -85,7 +86,27 @@ public class Panier {
 		} else {
 			throw new ExceptionRetirerArticleAbsentDuPanier("Impossible de supprimer un exemplaire, cet article n'est pas présent dans le panier");
 			}
-	
 
 	}//retirerUnArticle
+
+	// nombre de lignes dans panier
+	public int getSizeContenuPanier(){
+		int quantite = lignesPanier.size();
+		return quantite;
+	}
+	
+	//nombre d'articles dans panier (plusieurs articles par ligne)
+	public int getArticlesCumulesPanier(){
+		int i = 0;
+		for(LignePanier lignePanier : lignesPanier){
+			i = i + lignePanier.getQuantite();		
+		}
+		return i;
+	}
+	
+	@Override
+	public Iterator<LignePanier> iterator() {
+		// TODO Auto-generated method stub
+		return lignesPanier.iterator();
+	}
 }// class

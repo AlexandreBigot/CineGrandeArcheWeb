@@ -90,6 +90,23 @@ public class ControlerArticles extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		// je dis à tomcat d'utiliser les accente et caractères spéciaux
+		request.setCharacterEncoding("UTF-8");
+		
+		// j'identifie et je stocke la session actuelle
+			HttpSession session = request.getSession();
+				
+		// je stocke le paramètre de requete (le name du bouton)
+			String action = request.getParameter("action");
+
+		// si on clique sur Voir les articles j'affiche la page articles
+		// TODO : vérification nom utilisateur et mdp pour valider connection
+			if (action != null && action.equals("Voir les articles")) {
+
+				// je récupère la requête et je renvoie vers la JSP
+				RequestDispatcher rd = request.getRequestDispatcher("/Articles.jsp");
+				rd.forward(request, response);
+			} // if bouton Voir les articles
 		
 		
 	}// do post
