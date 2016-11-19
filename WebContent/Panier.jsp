@@ -21,18 +21,33 @@
 		<div class="titrePanier">
 			<br />
 			VOTRE PANIER
+			<br/><br/>
 			</div>
+			<br/>
+			
+		<c:if test="${panier.getSizeContenuPanier() == 0}">
 		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<p>Votre panier est vide</p>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		</c:if>
+		
 		<c:forEach var="ligne" items="${panier.iterator()}">
 			<div class="articlePanier">
-				<br/>
 				<div class="headerArticle">
 					<c:if test="${empty ligne.article.materiel}">
 						<div class="infosArticle">
 							<ul>
 								<li>${ligne.article.nom}</li>
 								<li>Auteur : ${ligne.article.auteur}</li>
-								<li>Prix HT : <fmt:formatNumber value="${ligne.article.prixHt}" minFractionDigits="2" /> €</li>
+								<li>Prix HT : <fmt:formatNumber
+										value="${ligne.article.prixHt}" minFractionDigits="2" /> €
+								</li>
 								<li>Format numérique : ${ligne.article.immateriel.format}</li>
 							</ul>
 						</div>
@@ -45,23 +60,27 @@
 								<li>${ligne.article.nom}</li>
 								<li>Auteur : ${ligne.article.auteur}</li>
 								<li>Etat : ${ligne.article.materiel.etat}</li>
-								<li>Prix HT : <fmt:formatNumber value="${ligne.article.prixHt}" minFractionDigits="2" /> €</li>
+								<li>Prix HT : <fmt:formatNumber
+										value="${ligne.article.prixHt}" minFractionDigits="2" /> €
+								</li>
 								<li>Quantité disponible : ${ligne.article.stock}</li>
 							</ul>
 						</div>
 					</c:if>
-					
 					<div id="formModifierPanier" class="contenuHeaderArticle">
+					<br/>
 						<form action="ControlerPanier" method="post">
 							<input type="hidden" value="${ligne.article.ref}" name="refArticle">
 							<label for="nom">Quantité :</label>
-							<input class="champsAjoutPanier" type="number" value="1" min="1" name="quantiteDansPanier"/>
-							<input type=submit value="Modifier" name="action"/>
-							<input type=submit value="Supprimer" name="action"/>
+							<input class="champsAjoutPanier" type="number" value="${ligne.getQuantite()}" min="1" name="quantiteDansPanier"/>
+							<input type=submit value="Modifier" name="action" />
+							<input type=submit value="Supprimer" name="action" />
 						</form>
 					</div>
 				</div>
-				<br />
+			</div>
+
+
 
 		</c:forEach>
 

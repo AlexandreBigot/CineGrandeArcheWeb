@@ -38,10 +38,16 @@ public class Panier implements Iterable<LignePanier> {
 	public void ajouterUnArticle(Article a, int quantiteAjoutée) throws ExceptionQuantiteDemandeeSuperieureAuStock{
 		LignePanier lp1 = new LignePanier(a, quantiteAjoutée);
 		int indexDeMaLigne = lignesPanier.indexOf(lp1);
+		
+		// modif importante !!!
+		// si la ligne a déjà des articles il faut les comptabiliser pour comparer au stock
+		// test sur quantitéLignePlusQuantiteAjoutée, pas uniquement sur la quantité ajoutée !!!
+		int quantitéLignePlusQuantiteAjoutée = lp1.getQuantite() + quantiteAjoutée;
+		
 		// si la ligne article existe déjà
 		if (indexDeMaLigne != -1){
 			// si la quantité ajoutée <= stock de l'article
-			if (quantiteAjoutée <= a.getStock()){
+			if (quantitéLignePlusQuantiteAjoutée <= a.getStock()){
 				lignesPanier.get(indexDeMaLigne).setQuantite(
 						lignesPanier.get(indexDeMaLigne).getQuantite() + quantiteAjoutée);
 			} else { // si quantite demandée supérieure au stock
@@ -103,7 +109,16 @@ public class Panier implements Iterable<LignePanier> {
 		}
 		return i;
 	}
-	
+
+	// méthod epour modifier la quantité de la ligne panier
+	public void modifierQuantiteLignePanier (String refArticleLigne, int nouvelleQuantiteLigne){
+		for(LignePanier lignePanier : lignesPanier){
+			if (lignePanier.getArticle().getRef() == refArticleLigne){
+				lignePanier.setQuantite(nouvelleQuantiteLigne);
+			} // if
+		} //for
+	} // modifierQuantiteLignePanier
+			
 	@Override
 	public Iterator<LignePanier> iterator() {
 		// TODO Auto-generated method stub

@@ -25,6 +25,7 @@ public class ControlerArticles extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		// j'identifie et je stocke la session actuelle
 		HttpSession session = request.getSession();
 

@@ -37,6 +37,10 @@ header{
 	justify-content: space-around;
 }
 
+.divbody p{
+	text-align: center;
+	font-size: 1.4em;
+}
 
 .article{
 	border-top: darkred solid 2px;	
@@ -52,6 +56,7 @@ header{
 	width: 100%;
 	text-align: center;
 	border-top: darkred solid 2px;
+	border-bottom: darkred solid 2px;
 }
 
 .headerArticle{
