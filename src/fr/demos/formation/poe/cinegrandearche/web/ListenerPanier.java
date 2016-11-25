@@ -19,6 +19,12 @@ public class ListenerPanier implements HttpSessionListener {
     	// je pourrai utiliser mon panier dans ma servlet avec session.getAttribute(panier)
     	// ou en EL ${panier} dans jsp
     	arg0.getSession().setAttribute("panier", p);
+    	
+    	// je crée un attribut pour la session pour savoir de quelle jsp je viens
+    	// Page Articles par défaut car page d'accueil
+    	String jspCourante = "/Articles.jsp";
+    	arg0.getSession().setAttribute("jspCourante", jspCourante);
+    	
     }
 
     public void sessionDestroyed(HttpSessionEvent arg0)  { 

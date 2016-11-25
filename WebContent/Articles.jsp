@@ -26,7 +26,7 @@
 						<form action="ControlerPanier" method="post">
 						<input type="hidden" value="${article.ref}" name="refArticle">
 						<label for="nom">Quantité :</label>
-						<input class="champsAjoutPanier" type="number" value="" min="1" name="quantiteAjouteePanier"/>
+						<input class="champsAjoutPanier" type="number" value="1" min="1" name="quantiteAjouteePanier"/>
 						<input type=submit value="Ajouter au panier" name="action"/>
 						</form>					
 					</div>

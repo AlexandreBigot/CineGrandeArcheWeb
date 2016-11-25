@@ -37,9 +37,15 @@ header{
 	justify-content: space-around;
 }
 
-.divbody p{
+.pPanier{
 	text-align: center;
 	font-size: 1.4em;
+}
+
+.pPassword{
+	color: red;
+	font-size: bold;
+
 }
 
 .article{

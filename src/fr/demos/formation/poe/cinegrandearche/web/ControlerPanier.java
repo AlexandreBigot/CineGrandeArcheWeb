@@ -202,6 +202,38 @@ public class ControlerPanier extends HttpServlet {
 			rd.forward(request, response);
 		} // si on clique sur voir le panier
 
+		
+		
+		// si on clique sur supprimer
+		if (action != null && action.equals("Supprimer")) {
+
+			System.out.println("on a cliqué sur le bouton supprimer");
+
+			// Je récupere la réf de l'article pour identifier la ligne à supprimer
+			String refArticleLigne = request.getParameter("refArticle");
+		
+			System.out.println("refArticleLigne : " + refArticleLigne);
+			
+			// Je me connecte au panier de la session en le castant
+			Panier p = (Panier) session.getAttribute("panier");
+
+			System.out.println("panier : " + p);
+			System.out.println("nombre lignes du panier : " + p.getSizeContenuPanier());
+			
+			// je supprime la ligne panier
+			// il faut la référence de la ligne à supprimer en argument
+			
+			p.supprimerLignePanier(refArticleLigne);
+			
+			System.out.println("j'ai supprimé la ligne");
+			System.out.println("nombre lignes du panier : " + p.getSizeContenuPanier());
+
+			// je récupère la requête et je renvoie vers la JSP
+			RequestDispatcher rd = request.getRequestDispatcher("/Panier.jsp");
+			rd.forward(request, response);
+			
+		} // si on clic bouton supprimer	
+
 	
 	
 	

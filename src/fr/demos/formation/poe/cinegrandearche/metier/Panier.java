@@ -13,6 +13,14 @@ public class Panier implements Iterable<LignePanier> {
 //	relier un panier à une session ou un compte
 	private ArrayList<LignePanier> lignesPanier = new ArrayList<LignePanier>();
 	
+	
+	@Override
+	public String toString() {
+		return "Panier [lignesPanier=" + lignesPanier + ", getPrixTotal()=" + getPrixTotal()
+				+ ", getSizeContenuPanier()=" + getSizeContenuPanier() + ", getArticlesCumulesPanier()="
+				+ getArticlesCumulesPanier() + "]";
+	}
+
 	public double getPrixTotal(){
 		double prixTotal=0;
 		for (LignePanier ligneDuPanier : lignesPanier){
@@ -67,33 +75,60 @@ public class Panier implements Iterable<LignePanier> {
 		}//else
 	}//ajouterUnArticle
 	
-	// appelée par retirer un article
-	private void supprimerLignePanier(int i){
-		lignesPanier.remove(i);
-	}
-	
-	public void retirerUnArticle(Article a, int quantiteRetiree) throws ExceptionRetirerArticlePanier, ExceptionRetirerArticleAbsentDuPanier{
-		LignePanier lp1 = new LignePanier(a, quantiteRetiree);
-		int indexDeMaLigne = lignesPanier.indexOf(lp1);
-		int quantiteLigne = lignesPanier.get(indexDeMaLigne).getQuantite();
-		if (indexDeMaLigne != -1){
-			if (quantiteRetiree == quantiteLigne) {
-				this.supprimerLignePanier(indexDeMaLigne);
-			}
-			else if (quantiteRetiree > quantiteLigne){
-				throw new ExceptionRetirerArticlePanier(
-					"Vous essayez de retirer trop d'exemplaires de cet article, quantité dans le panier = ",
-					quantiteLigne);
-			}
-			else if (quantiteRetiree < quantiteLigne) {
-				int nouvelleQuantite = quantiteLigne - quantiteRetiree;
-				lignesPanier.get(indexDeMaLigne).setQuantite(nouvelleQuantite);	
-			}
-		} else {
-			throw new ExceptionRetirerArticleAbsentDuPanier("Impossible de supprimer un exemplaire, cet article n'est pas présent dans le panier");
-			}
 
-	}//retirerUnArticle
+	// supprimer ligne à partir de la référence trouvée dans la ligne (c'est ma clé primaire)
+	public void supprimerLignePanier(String refArticleLigne){
+	
+		// méthode moche, NON TESTEE
+		/*int indexLigneTrouvee=-1;
+		for (LignePanier lignePanier : lignesPanier) {
+			if(lignePanier.getArticle().getRef().equals(refArticleLigne)){
+				indexLigneTrouvee = lignesPanier.indexOf(lignePanier);
+				break;
+			}	
+		}
+		if(indexLigneTrouvee!=-1){
+			lignesPanier.remove(indexLigneTrouvee);
+		}*/	
+		
+		// j'utilise l'outil iterator
+		Iterator<LignePanier> iter = lignesPanier.iterator();
+		// tant qu'il y en a
+		while(iter.hasNext()){
+			// va au suivant
+			LignePanier lp= iter.next();
+			// si la réf est la même, c'est ma ligne panier
+			if(lp.getArticle().getRef().equals(refArticleLigne)){
+				iter.remove();
+			} // if
+		} // while
+	} //supprimer ligne
+	
+	
+	
+	// ne sert plus à rien on modifie la ligne, plus de suppression sauf ligne entière.
+//	public void retirerUnArticle(Article a, int quantiteRetiree) throws ExceptionRetirerArticlePanier, ExceptionRetirerArticleAbsentDuPanier{
+//		LignePanier lp1 = new LignePanier(a, quantiteRetiree);
+//		int indexDeMaLigne = lignesPanier.indexOf(lp1);
+//		int quantiteLigne = lignesPanier.get(indexDeMaLigne).getQuantite();
+//		if (indexDeMaLigne != -1){
+//			if (quantiteRetiree == quantiteLigne) {
+//				this.supprimerLignePanier(indexDeMaLigne);
+//			}
+//			else if (quantiteRetiree > quantiteLigne){
+//				throw new ExceptionRetirerArticlePanier(
+//					"Vous essayez de retirer trop d'exemplaires de cet article, quantité dans le panier = ",
+//					quantiteLigne);
+//			}
+//			else if (quantiteRetiree < quantiteLigne) {
+//				int nouvelleQuantite = quantiteLigne - quantiteRetiree;
+//				lignesPanier.get(indexDeMaLigne).setQuantite(nouvelleQuantite);	
+//			}
+//		} else {
+//			throw new ExceptionRetirerArticleAbsentDuPanier("Impossible de supprimer un exemplaire, cet article n'est pas présent dans le panier");
+//			}
+//
+//	}//retirerUnArticle
 
 	// nombre de lignes dans panier
 	public int getSizeContenuPanier(){
@@ -110,10 +145,12 @@ public class Panier implements Iterable<LignePanier> {
 		return i;
 	}
 
-	// méthod epour modifier la quantité de la ligne panier
+	
+	// méthode pour modifier la quantité de la ligne panier
 	public void modifierQuantiteLignePanier (String refArticleLigne, int nouvelleQuantiteLigne){
 		for(LignePanier lignePanier : lignesPanier){
-			if (lignePanier.getArticle().getRef() == refArticleLigne){
+			if (lignePanier.getArticle().getRef().equals(refArticleLigne)){
+				// pas de test sur stock car on ne peut pas modifier la quantité à "0"
 				lignePanier.setQuantite(nouvelleQuantiteLigne);
 			} // if
 		} //for

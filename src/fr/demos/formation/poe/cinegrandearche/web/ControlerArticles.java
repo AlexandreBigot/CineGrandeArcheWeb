@@ -86,7 +86,12 @@ public class ControlerArticles extends HttpServlet {
 		// je récupère la requête et je renvoie vers la JSP
 		RequestDispatcher rd = request.getRequestDispatcher("/Articles.jsp");
 		rd.forward(request, response);
-
+		
+		//je renseigne la nouvelle jsp courante après chaque rd.forward
+    	String jspCourante = "/Articles.jsp";
+    	session.setAttribute("jspCourante", jspCourante);
+    	
+    	
 	}// do get
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -107,6 +112,11 @@ public class ControlerArticles extends HttpServlet {
 				// je récupère la requête et je renvoie vers la JSP
 				RequestDispatcher rd = request.getRequestDispatcher("/Articles.jsp");
 				rd.forward(request, response);
+				
+				//je renseigne la nouvelle jsp courante après chaque rd.forward (la même que le forward)
+		    	String jspCourante = "/Articles.jsp";
+		    	session.setAttribute("jspCourante", jspCourante);
+				
 			} // if bouton Voir les articles
 		
 		

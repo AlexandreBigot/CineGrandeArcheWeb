@@ -30,7 +30,7 @@
 		<br/>
 		<br/>
 		<br/>
-		<p>Votre panier est vide</p>
+		<p class="pPanier">Votre panier est vide</p>
 		<br/>
 		<br/>
 		<br/>
