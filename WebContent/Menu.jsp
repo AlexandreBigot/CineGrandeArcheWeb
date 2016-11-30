@@ -64,5 +64,12 @@
 		</div>
 	</div>
 
+	<div class="elementMenu" id="rechercheArticleMenu">
+	
+		<form id="formRecherche" method="post" action="ControlerArticles">
+			<input type=submit value="Rechercher" name="action" />
+			<input type="text" value="${param.recherche}" name="recherche" />
+			</form>
+	</div>
 </div>
 

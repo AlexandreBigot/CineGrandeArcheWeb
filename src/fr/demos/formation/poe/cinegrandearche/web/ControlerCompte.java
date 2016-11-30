@@ -14,8 +14,8 @@ import javax.servlet.http.HttpSession;
 public class ControlerCompte extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	// mis dans Compte.java, instancier un compte et le récupérer
-	private boolean connecteAuCompte = false;
+	// a gérer dans Compte.java puis instancier un compte et le récupérer
+//	private boolean connecteAuCompte = false;
 
 	public ControlerCompte() {
 		super();
@@ -54,49 +54,50 @@ public class ControlerCompte extends HttpServlet {
 		// je stocke le paramètre de requete (le name du bouton)
 		String action = request.getParameter("action");
 		
+		
+		
 		// je mets mon boolean connecteAuCompte en attribut de session pour
 		// pouvoir utiliser EL
-		session.setAttribute("connecteAuCompte", connecteAuCompte);
+	//	session.setAttribute("connecteAuCompte", connecteAuCompte);
 
 		// si on clique sur connection je me connecte
 		// TODO : vérification nom utilisateur et mdp pour valider connection
 		if (action != null && action.equals("Connection")) {
-			connecteAuCompte = true;
+			
+			// je redéfini la valeur de ma variable
+			// il fait de l'autoboxing donc pas besoin de luimettre un objet  mais la valeur compatible avec le type
+			session.setAttribute("connecteAuCompte", true);
 
 			// je récupère la requête et je renvoie vers la JSP
-			RequestDispatcher rd = request.getRequestDispatcher("/Articles.jsp");
+			String uriCible = (String)session.getAttribute("jspCourante");
+			RequestDispatcher rd = request.getRequestDispatcher(uriCible);
 			rd.forward(request, response);
-			
-			//je renseigne la nouvelle jsp courante après chaque rd.forward (la même que le forward)
-	    	String jspCourante = "/Articles.jsp";
-	    	session.setAttribute("jspCourante", jspCourante);
-			
+			// pas besoin de changer le jspCourante car c'est la même
+		
 		} // if bouton connection
+	
 		
-		
-		
-		
-		// if bouton déconnection
-		if(action != null && action.equals("Se déconnecter")){
+		// if bouton Se déconnecter
+		if ((boolean)session.getAttribute("connecteAuCompte") && action != null && action.equals("Se déconnecter")) {
+
 			// je déconnecte
 			// plus tard il faudra sauvegarder le panier pour la prochaine connection
-			connecteAuCompte = false;
+			// je redéfini la valeur de ma variable
+			// il fait de l'autoboxing donc pas besoin de luimettre un objet  mais la valeur compatible avec le type
+			session.setAttribute("connecteAuCompte", false);
 			
 			// je récupère la requête et je renvoie vers la JSP
-			RequestDispatcher rd = request.getRequestDispatcher("/Articles.jsp");
+			String uriCible = (String)session.getAttribute("jspCourante");
+			RequestDispatcher rd = request.getRequestDispatcher(uriCible);
 			rd.forward(request, response);
+			// pas besoin de changer le jspCourante car c'est la même
 			
-			//je renseigne la nouvelle jsp courante après chaque rd.forward (la même que le forward)
-	    	String jspCourante = "/Articles.jsp";
-	    	session.setAttribute("jspCourante", jspCourante);
-			
-		}// if bouton déconnection
-		
-		
+		} // if bouton Se déconnecter
+
 		
 		
 		// if bouton voir le compte
-		if (connecteAuCompte && action != null && action.equals("Voir le compte")) {
+		if ((boolean)session.getAttribute("connecteAuCompte") && action != null && action.equals("Voir le compte")) {
 			// je récupère la requête et je renvoie vers la JSP
 			RequestDispatcher rd = request.getRequestDispatcher("/GestionCompte.jsp");
 			rd.forward(request, response);
@@ -110,12 +111,6 @@ public class ControlerCompte extends HttpServlet {
 		
 		
 		
-		// if bouton Se déconnecter
-		if (connecteAuCompte && action != null && action.equals("Se déconnecter")) {
-			// je récupère la requête et je renvoie vers la JSP
-			RequestDispatcher rd = request.getRequestDispatcher("/GestionCompte.jsp");
-			rd.forward(request, response);
-		} // if bouton Se déconnecter
 		
 		
 		
@@ -126,6 +121,11 @@ public class ControlerCompte extends HttpServlet {
 			// je récupère la requête et je renvoie vers la JSP
 			RequestDispatcher rd = request.getRequestDispatcher("/CreerCompte.jsp");
 			rd.forward(request, response);
+			
+			//je renseigne la nouvelle jsp courante après chaque rd.forward (la même que le forward)
+	    	String jspCourante = "/CreerCompte.jsp";
+	    	session.setAttribute("jspCourante", jspCourante);
+			
 		} // if bouton Créer un Compte
 
 		
@@ -135,6 +135,11 @@ public class ControlerCompte extends HttpServlet {
 			// je récupère la requête et je renvoie vers la JSP
 			RequestDispatcher rd = request.getRequestDispatcher("/CreerCompte.jsp");
 			rd.forward(request, response);
+			
+			//je renseigne la nouvelle jsp courante après chaque rd.forward (la même que le forward)
+	    	String jspCourante = "/CreerCompte.jsp";
+	    	session.setAttribute("jspCourante", jspCourante);
+
 		} // if bouton Créer un Compte
 
 

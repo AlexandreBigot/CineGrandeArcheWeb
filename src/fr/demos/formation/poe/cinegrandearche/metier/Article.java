@@ -7,7 +7,6 @@ public abstract class Article {
 	private String nom;
 	private String description;
 	private String urlImage;
-//	private boolean dematerialise;
 	private Materialise materiel;
 	private Dematerialise immateriel;
 	private int stock;

@@ -130,6 +130,31 @@ public class Panier implements Iterable<LignePanier> {
 //
 //	}//retirerUnArticle
 
+	// TODO déclencher mise à jour panier avec quantité disponible en stock si return false
+	// vérifications si la commande peut être validée
+	//    /!\   déclencher le plus tard possible (à validation du paiement)    /!\
+	public boolean validerStockCommande(Panier p){
+		
+		boolean stockArticlesOk = true;
+		
+		// parcourir le panier et sortir la quantité
+		for(LignePanier ligne : lignesPanier){
+			
+			int nbreArticlesLigne = ligne.getQuantite();			
+			// si au moins une lignePanier > stock article
+			if(nbreArticlesLigne <= ligne.getArticle().getStock()){
+				stockArticlesOk = false;
+			}
+		} // for each
+		return stockArticlesOk;
+	} // validerCommande
+	
+	
+	//  valider paiement puis modifier stock et déclencher livraison, facture et enregistrement commande en BDD
+	public void procederCommande(Panier p, Compte c){
+		
+	}
+	
 	// nombre de lignes dans panier
 	public int getSizeContenuPanier(){
 		int quantite = lignesPanier.size();

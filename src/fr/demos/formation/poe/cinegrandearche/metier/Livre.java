@@ -70,6 +70,10 @@ public class Livre extends Article {
 	public String getGenre() {
 		return genre;
 	}
+	
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
 
 	public LocalDate getDate() {
 		return date;

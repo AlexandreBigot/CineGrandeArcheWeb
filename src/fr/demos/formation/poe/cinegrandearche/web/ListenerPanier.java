@@ -1,9 +1,13 @@
 package fr.demos.formation.poe.cinegrandearche.web;
 
+import java.util.ArrayList;
+
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
+import fr.demos.formation.poe.cinegrandearche.data.ArticleDAOMySql;
+import fr.demos.formation.poe.cinegrandearche.metier.Article;
 import fr.demos.formation.poe.cinegrandearche.metier.Panier;
 
 @WebListener
@@ -14,6 +18,16 @@ public class ListenerPanier implements HttpSessionListener {
     }
 
     public void sessionCreated(HttpSessionEvent arg0)  { 
+    	// je crée mon arrayList à partir de la BDD SQL
+    	try {
+			ArticleDAOMySql articleDAOMySql = new ArticleDAOMySql();
+			ArrayList<Article> catalogue = (ArrayList<Article>) articleDAOMySql.select("");
+			arg0.getSession().setAttribute("catalogue", catalogue);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
     	// je crée un panier au démarrage de la session
     	Panier p = new Panier();
     	// je pourrai utiliser mon panier dans ma servlet avec session.getAttribute(panier)
@@ -24,6 +38,13 @@ public class ListenerPanier implements HttpSessionListener {
     	// Page Articles par défaut car page d'accueil
     	String jspCourante = "/Articles.jsp";
     	arg0.getSession().setAttribute("jspCourante", jspCourante);
+    	
+    	// a gérer dans Compte.java puis instancier un compte et le récupérer
+    	boolean connecteAuCompte = false;
+    	arg0.getSession().setAttribute("connecteAuCompte", connecteAuCompte);
+
+
+
     	
     }
 

@@ -20,8 +20,21 @@
 
 		<div class="titrePanier">
 			<br />
+			<div id="titreVotrePanier" class="enTetePanier">
 			VOTRE PANIER
-			<br/><br/>
+			</div>
+			<div id="boutonAcheter" class="enTetePanier">
+			<c:if test="${panier.getSizeContenuPanier() > 0}">
+			<form id="acheter" action="ControlerPanier" method="post">
+				<input type=submit value="Acheter" name="action" />
+			</form>
+			</c:if>
+			</div>
+			<br/>
+			<c:if test="${panier.getSizeContenuPanier() == 0}">
+			<br/>
+			</c:if>
+			
 			</div>
 			<br/>
 			
@@ -79,12 +92,17 @@
 					</div>
 				</div>
 			</div>
-
-
-
 		</c:forEach>
 
-
+		<br>
+		<br>
+		<div >
+			<br/>
+			<form id="acheter" action="ControlerPanier" method="post">
+				<input type=submit value="Acheter" name="action" />
+			</form>
+		</div>
+	
 
 	</div>
 </body>

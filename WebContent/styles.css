@@ -13,6 +13,7 @@ body{
 	padding: 20px;
 	border-radius: 10px;
 	box-shadow:#464040 0px 0px 15px;
+	
 }
 
 li{
@@ -25,6 +26,24 @@ header{
 }
 
 #headerPanier{
+}
+
+.titrePanier{
+	width: 100%;
+	text-align: center;
+	border-top: darkred solid 2px;
+	border-bottom: darkred solid 2px;
+	display: flex;	
+}
+
+.enTetePanier{
+	justify-content: center;
+}
+
+#titreVotrePanier{
+}
+
+#boutonAcheter{
 }
 
 .menu{
@@ -58,12 +77,6 @@ header{
 	border-top: darkgrey solid 2px;	
 }
 
-.titrePanier{
-	width: 100%;
-	text-align: center;
-	border-top: darkred solid 2px;
-	border-bottom: darkred solid 2px;
-}
 
 .headerArticle{
 	display: flex;

@@ -1,11 +1,16 @@
+3 afficher plus d'infos pour chaque article (ceux sur lesquels ont recherche
 
-attribut de session pour savoir dans quelle page on eest et modifier l'attribut dès qu'on recharge une page
+faire un prepare statement supplémentaire pour la table article JOIN article_divers
+
+recherche sur date marche pas 
+
+arriver à bien positionner les flex du menu...
 
 page créer compte et boutons puis utiliser les identifiants
 
-toutes les vérifs des données récupérées en post + gestion des erreurs
+1 toutes les vérifs des données récupérées en post + gestion des erreurs
 
-bouton valider commande vérif si connecté + vérif l'état du stock + modifier le stock après validation
+2 bouton valider commande vérif si connecté + vérif l'état du stock + modifier le stock après validation
 
 vider le panier 
 
