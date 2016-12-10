@@ -46,14 +46,30 @@ header{
 #boutonAcheter{
 }
 
-.menu{
+.menuVertical{
 	width: 100%;
 	display: flex;
+	flex-direction: column;
+		
+}
+
+.menuHorizontal{
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+		
 }
 
 .elementMenu{
 	display: flex;
 	justify-content: space-around;
+}
+
+.titrePanier{
+	display: flex;
+	justify-content: stretch;
+	
+	
 }
 
 .pPanier{

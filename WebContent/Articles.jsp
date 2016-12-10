@@ -44,25 +44,64 @@
 					</div>
 					<!-- si article dématérialisé -->
 					<c:if test="${empty article.materiel}">
-						<div class="infosArticle">
-							<ul>
-								<li>Auteur : ${article.auteur}</li>
-								<li>Prix HT : <fmt:formatNumber value="${article.prixHt}" minFractionDigits="2" /> €</li>
-								<li>Format numérique : ${article.immateriel.format}</li>
-							</ul>
-						</div>
+						<c:if test="${article.typeArticle eq 'LIVRE'}">
+							<div class="infosArticle">
+								<ul>
+									<li>Auteur : ${article.auteur}</li>
+									<li>Editeur : ${article.editeur}</li>
+									<li>Prix HT : <fmt:formatNumber value="${article.prixHt}" minFractionDigits="2" /> €</li>
+									<li>Format numérique : ${article.immateriel.format}</li>
+									<li>Date de parution : ${article.date}</li>
+									<li>Genre : ${article.genre}</li>
+									<li>ASIN : ${article.isbn}</li>
+									<li>Référence : ${article.ref}</li>
+								</ul>
+							</div>
+						</c:if>
+						<c:if test="${article.typeArticle eq 'ARTICLE_DIVERS'}">
+							<div class="infosArticle">
+								<ul>
+									<li>Article : ${article.typeArticleDivers}</li>
+									<li>Caractéristiques : ${article.caracteristiques}</li>
+									<li>Prix HT : <fmt:formatNumber value="${article.prixHt}" minFractionDigits="2" /> €</li>
+									<li>Format numérique : ${article.immateriel.format}</li>
+									<li>Référence : ${article.ref}</li>
+								</ul>
+							</div>
+						</c:if>
+						
 					</c:if>
 
 					<!-- si article matériel -->
 					<c:if test="${empty article.immateriel}">
-						<div class="infosArticle">
-							<ul>
-								<li>Auteur : ${article.auteur}</li>
-								<li>Etat : ${article.materiel.etat}</li>
-								<li>Prix HT : <fmt:formatNumber value="${article.prixHt}" minFractionDigits="2" /> €</li>
-								<li>Quantité disponible : ${article.stock}</li>
-							</ul>
-						</div>
+						<c:if test="${article.typeArticle eq 'LIVRE'}">
+							<div class="infosArticle">
+								<ul>
+									<li>Auteur : ${article.auteur}</li>
+									<li>Editeur : ${article.editeur}</li>
+									<li>Etat : ${article.materiel.etat}</li>
+									<li>Prix HT : <fmt:formatNumber value="${article.prixHt}" minFractionDigits="2" /> €</li>
+									<li>Quantité disponible : ${article.stock}</li>
+									<li>Date de parution : ${article.date}</li>
+									<li>Genre : ${article.genre}</li>
+									<li>ISBN : ${article.isbn}</li>
+									<li>Référence : ${article.ref}</li>
+								</ul>
+							</div>
+						</c:if>
+						<c:if test="${article.typeArticle eq 'ARTICLE_DIVERS'}">
+							<div class="infosArticle">
+								<ul>
+									<li>Article : ${article.typeArticleDivers}</li>
+									<li>Caractéristiques : ${article.caracteristiques}</li>
+									<li>Etat : ${article.materiel.etat}</li>
+									<li>Prix HT : <fmt:formatNumber value="${article.prixHt}" minFractionDigits="2" /> €</li>
+									<li>Quantité disponible : ${article.stock}</li>
+									<li>Référence : ${article.ref}</li>
+								</ul>
+							</div>
+						
+						</c:if>		
 					</c:if>
 
 				</div>

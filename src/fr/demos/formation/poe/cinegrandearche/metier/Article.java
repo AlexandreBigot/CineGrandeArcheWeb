@@ -10,9 +10,10 @@ public abstract class Article {
 	private Materialise materiel;
 	private Dematerialise immateriel;
 	private int stock;
+	private TypeArticle typeArticle;
 
 	// constructeur si dématérialisé pdf, iso, exe... (appel avec arguments
-	public Article(String argRef, double argPrixHt, String argNom, String argUrlImage, String argFormat, String argUrlDownload) {
+	public Article(String argRef, double argPrixHt, String argNom, String argUrlImage, String argFormat, String argUrlDownload, TypeArticle argTypeArticle) {
 		super();
 		this.ref = argRef;
 		this.prixHt = argPrixHt;
@@ -20,10 +21,11 @@ public abstract class Article {
 		this.urlImage = argUrlImage;
 		this.stock = 1;
 		this.immateriel = new Dematerialise(argFormat, argUrlDownload);
+		this.typeArticle = argTypeArticle;
 	}
 
 	// constructeur si matérialisé et neuf car 80% de l'activité = livres neufs
-	public Article(String argRef, double argPrixHt, String argNom, String argUrlImage, int argStock) {
+	public Article(String argRef, double argPrixHt, String argNom, String argUrlImage, int argStock, TypeArticle argTypeArticle) {
 		super();
 		this.ref = argRef;
 		this.prixHt = argPrixHt;
@@ -31,11 +33,12 @@ public abstract class Article {
 		this.urlImage = argUrlImage;
 		this.stock = argStock;
 		this.materiel = new Materialise(Etat.NEUF);
+		this.typeArticle = argTypeArticle;
 	}
 
 	// constructeur si matérialisé livre, dvd, cd... (appel avec arguments stock
 	// et etat)
-	public Article(String argRef, double argPrixHt, String argNom, String argUrlImage, int argStock, Etat argEtat) {
+	public Article(String argRef, double argPrixHt, String argNom, String argUrlImage, int argStock, Etat argEtat, TypeArticle argTypeArticle) {
 		super();
 		this.ref = argRef;
 		this.prixHt = argPrixHt;
@@ -43,13 +46,16 @@ public abstract class Article {
 		this.urlImage = argUrlImage;
 		this.stock = argStock;
 		this.materiel = new Materialise(argEtat);
+		this.typeArticle = argTypeArticle;
 	}
 	
+
+
 	@Override
 	public String toString() {
 		return "Article [ref=" + ref + ", prixHt=" + prixHt + ", nom=" + nom + ", description=" + description
 				+ ", urlImage=" + urlImage + ", materiel=" + materiel + ", immateriel=" + immateriel + ", stock="
-				+ stock + "]";
+				+ stock + ", typeArticle=" + typeArticle + "]";
 	}
 
 	//METHODE INUTILE POUR LE MOMENT
@@ -137,9 +143,14 @@ public abstract class Article {
 		return immateriel;
 	}
 
-//	public boolean isDematerialise() {
-//		return dematerialise;
-//	}
+	public TypeArticle getTypeArticle() {
+		return typeArticle;
+	}
+
+	public void setTypeArticle(TypeArticle typeArticle) {
+		this.typeArticle = typeArticle;
+	}
+
 
 	
 

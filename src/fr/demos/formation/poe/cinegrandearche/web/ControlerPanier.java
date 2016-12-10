@@ -92,8 +92,8 @@ public class ControlerPanier extends HttpServlet {
 						// je mets les éléments du message dans une variable
 						// unique pour la mettre en argument du setAttribute
 						String messageExceptionQDSAS = message + quantiteStock;
-						// je mets à disposition le message en EL
-						session.setAttribute("ExceptionQuantiteDemandeeSuperieureAuStock", messageExceptionQDSAS);
+						// je mets à disposition le message en EL pour la requete
+						request.setAttribute("ExceptionQuantiteDemandeeSuperieureAuStock", messageExceptionQDSAS);
 						// je mets dans la session la référence de l'article mis
 						// dans le panier
 						session.setAttribute("referenceArticlePanier", refArticle);

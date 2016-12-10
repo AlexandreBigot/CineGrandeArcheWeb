@@ -7,24 +7,24 @@ public class ArticleDivers extends Article {
 
 	// constructeur article divers dématérialisé
 	public ArticleDivers(String argRef, double argPrixHt, String argNom, String argUrlImage, String argFormat, String argUrlDownload,
-			String argTypeArticleDivers, String caracteristiques) {
-		super(argRef, argPrixHt, argNom, argUrlImage, argFormat, argUrlDownload);
+			 String argTypeArticleDivers, String caracteristiques) {
+		super(argRef, argPrixHt, argNom, argUrlImage, argFormat, argUrlDownload, TypeArticle.ARTICLE_DIVERS);
 		this.typeArticleDivers = argTypeArticleDivers;
 		this.caracteristiques = caracteristiques;
 	}
 
 	// constructeur article divers matérialisé neuf
-	public ArticleDivers(String argRef, double argPrixHt, String argNom, String argUrlImage, int argStock, String argTypeArticleDivers,
-			String caracteristiques) {
-		super(argRef, argPrixHt, argNom, argUrlImage, argStock);
+	public ArticleDivers(String argRef, double argPrixHt, String argNom, String argUrlImage, int argStock,
+			String argTypeArticleDivers, String caracteristiques) {
+		super(argRef, argPrixHt, argNom, argUrlImage, argStock, TypeArticle.ARTICLE_DIVERS);
 		this.typeArticleDivers = argTypeArticleDivers;
 		this.caracteristiques = caracteristiques;
 	}
 
 	// constructeur article divers matérialisé non neuf
-	public ArticleDivers(String argRef, double argPrixHt, String argNom, String argUrlImage, int argStock, Etat argEtat, String argTypeArticleDivers,
-			String caracteristiques) {
-		super(argRef, argPrixHt, argNom, argUrlImage, argStock, argEtat);
+	public ArticleDivers(String argRef, double argPrixHt, String argNom, String argUrlImage, int argStock, Etat argEtat,
+			String argTypeArticleDivers, String caracteristiques) {
+		super(argRef, argPrixHt, argNom, argUrlImage, argStock, argEtat, TypeArticle.ARTICLE_DIVERS);
 		this.typeArticleDivers = argTypeArticleDivers;
 		this.caracteristiques = caracteristiques;
 	}

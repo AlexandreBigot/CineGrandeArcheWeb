@@ -15,13 +15,14 @@ import fr.demos.formation.poe.cinegrandearche.metier.Article;
 import fr.demos.formation.poe.cinegrandearche.metier.ArticleDivers;
 import fr.demos.formation.poe.cinegrandearche.metier.Etat;
 import fr.demos.formation.poe.cinegrandearche.metier.Livre;
+import fr.demos.formation.poe.cinegrandearche.metier.TypeArticle;
 
 public class ArticleDAOMySql implements ArticleDAO {
 
 	private Context context;
 	private DataSource dataSource;
 		
-	// dans la constructeur je lance le context (annuaire) et le datasource (pool de connexion)
+	// dans le constructeur je lance le context (annuaire) et le datasource (pool de connexion)
 	public ArticleDAOMySql() throws Exception {
 		context = new InitialContext();
 		dataSource = (DataSource) context.lookup("java:comp/env/jdbc/CineGrandeArche");
@@ -52,24 +53,27 @@ public class ArticleDAOMySql implements ArticleDAO {
 
 		try (Connection cx = dataSource.getConnection()){
 			
-			PreparedStatement contexteRequete = null;
+			PreparedStatement contexteRequeteLivre = null;
+			PreparedStatement contexteRequeteArticleDivers = null;
 			
 			// si pas de critère de recherche, j'envoie toute la BDD
 			if (critere.equals("")){
-				contexteRequete = cx.prepareStatement(
-				"SELECT * FROM Livre JOIN Article ON Livre.reference_livre=Article.reference_article");
-			// sinon j'envoie la sélection
+				contexteRequeteLivre = cx.prepareStatement(
+				"SELECT * FROM Livre JOIN Article ON Livre.reference_livre=Article.reference_article ORDER BY Article.nom ASC");
+			
+				contexteRequeteArticleDivers = cx.prepareStatement(
+				"SELECT * FROM Article_divers JOIN Article ON Article_divers.reference_article_divers=Article.reference_article ORDER BY Article.nom ASC");
+								
+			// sinon j'envoie la sélection sur le critère de recherche
+				// TODO recherche sur articles divers contexteRequeteArticleDivers
 			} else {
+				
 				String critereSQL = "%"+critere+"%";
 				// upper(colonne) pour tout mettre virtuellement en MAJ et pouvoir comparer
 				// on a aussi mis le critere reçu en MAJ
 				
-// ##### requete qui marche #####				
-// SELECT * FROM Livre JOIN Article ON Livre.reference_livre=Article.reference_article
-// WHERE upper(Livre.editeur) LIKE '%DUNOD%'				
-				
-				
-				contexteRequete = cx.prepareStatement(
+// ##### LIVRE #####
+				contexteRequeteLivre = cx.prepareStatement(
 				"SELECT * FROM Livre JOIN Article ON Livre.reference_livre=Article.reference_article "
 				+ "WHERE upper(Article.reference_article) LIKE ? "
 				+ "OR upper(Article.nom) LIKE ? "
@@ -80,36 +84,55 @@ public class ArticleDAOMySql implements ArticleDAO {
 				+ "OR upper(Livre.auteur) LIKE ? "
 				+ "OR upper(Livre.isbn) LIKE ? "
 				+ "OR upper(Livre.editeur) LIKE ? "
-				+ "OR upper(Livre.genre) LIKE ? ");
-// on fera article divers plus tard...
-//				+ "OR upper(article_divers.type_article_divers) LIKE ? "
-//				+ "OR upper(article_divers.caracteristiques) LIKE ?"
-
+				+ "OR upper(Livre.genre) LIKE ? "
+				+ "ORDER BY Article.nom ASC");
 
 				// je renseigne les valeurs des "?"
-				contexteRequete.setString(1, critereSQL);
-				contexteRequete.setString(2, critereSQL);
-				contexteRequete.setString(3, critereSQL);
-				contexteRequete.setString(4, critereSQL);
-				contexteRequete.setString(5, critereSQL);
-				contexteRequete.setString(6, critereSQL);
-				contexteRequete.setString(7, critereSQL);
-				contexteRequete.setString(8, critereSQL);
-				contexteRequete.setString(9, critereSQL);
-				contexteRequete.setString(10, critereSQL);
-//				contexteRequete.setString(11, critereSQL);
-//				contexteRequete.setString(12, critereSQL);
+				contexteRequeteLivre.setString(1, critereSQL);
+				contexteRequeteLivre.setString(2, critereSQL);
+				contexteRequeteLivre.setString(3, critereSQL);
+				contexteRequeteLivre.setString(4, critereSQL);
+				contexteRequeteLivre.setString(5, critereSQL);
+				contexteRequeteLivre.setString(6, critereSQL);
+				contexteRequeteLivre.setString(7, critereSQL);
+				contexteRequeteLivre.setString(8, critereSQL);
+				contexteRequeteLivre.setString(9, critereSQL);
+				contexteRequeteLivre.setString(10, critereSQL);
+
+				
+// ##### Article divers #####				
+				contexteRequeteArticleDivers = cx.prepareStatement(
+				"SELECT * FROM Article_divers JOIN Article ON Article_divers.reference_article_divers=Article.reference_article "
+				+ "WHERE upper(Article.reference_article) LIKE ? "
+				+ "OR upper(Article.nom) LIKE ? "
+				+ "OR upper(Article.description) LIKE ? "
+				+ "OR upper(Article.type_article) LIKE ? "
+				+ "OR upper(Article.etat) LIKE ? "
+				+ "OR upper(Article.format) LIKE ? "
+				+ "OR upper(Article_divers.type_article_divers) LIKE ? "
+				+ "OR upper(Article_divers.caracteristiques) LIKE ?"
+				+ "ORDER BY Article.nom ASC");
+
+				// je renseigne les valeurs des "?"
+				contexteRequeteArticleDivers.setString(1, critereSQL);
+				contexteRequeteArticleDivers.setString(2, critereSQL);
+				contexteRequeteArticleDivers.setString(3, critereSQL);
+				contexteRequeteArticleDivers.setString(4, critereSQL);
+				contexteRequeteArticleDivers.setString(5, critereSQL);
+				contexteRequeteArticleDivers.setString(6, critereSQL);
+				contexteRequeteArticleDivers.setString(7, critereSQL);
+				contexteRequeteArticleDivers.setString(8, critereSQL);
+		
 				
 			}// if else
 			
-			// stockage de l'ensemble des résultats qu'on peut parcourrir
-			ResultSet rs = contexteRequete.executeQuery();
+			// stockage de l'ensemble des résultats Livre qu'on peut parcourrir
+			ResultSet rs = contexteRequeteLivre.executeQuery();
 			
 			// on parcours caque élément de l'objet
 			while (rs.next()) {
 				
 				Livre livre;
-				ArticleDivers articleDivers;
 				
 				// je récupère chaque enregistrement de la colonne dans une variable
 				String ref = rs.getString("reference_article");
@@ -122,7 +145,6 @@ public class ArticleDAOMySql implements ArticleDAO {
 				String nom = rs.getString("nom");
 				String description = rs.getString("description");
 				String url_image = rs.getString("url_image");
-		//		String type_article = rs.getString("type");
 				int stock = rs.getInt("stock");
 				String format = rs.getString("format");
 				// etat à utiliser après modif
@@ -153,10 +175,64 @@ public class ArticleDAOMySql implements ArticleDAO {
 			// j'ajoute le livre dans mon catalogue
 			catalogue.add(livre);
 			
-			} // while next
+			} // while Livre next
+			
+			
+			
+			// stockage de l'ensemble des résultats article_divers qu'on peut parcourrir
+			ResultSet rs2 = contexteRequeteArticleDivers.executeQuery();
+			
+			// on parcours caque élément de l'objet
+			while (rs2.next()) {
+				
+				ArticleDivers articleDivers;
+				
+				// je récupère chaque enregistrement de la colonne dans une variable
+				// attributs d'un article
+				String ref = rs2.getString("reference_article");
+				Double prix = rs2.getDouble("prix");
+				String nom = rs2.getString("nom");
+				String description = rs2.getString("description");
+				String url_image = rs2.getString("url_image");
+				TypeArticle type_article = TypeArticle.valueOf(rs2.getString("type_article"));
+				int stock = rs2.getInt("stock");
+				String format = rs2.getString("format");
+				Etat etat;
+				if (format.equals("")){
+					etat = Etat.valueOf(rs2.getString("etat"));
+				} else {
+					etat = null;
+				}
+				String url_download = rs2.getString("url_download");
+				
+				// attributs d'un article divers
+				String type_article_divers = rs2.getString("type_article_divers");
+				String caracteristiques = rs2.getString("caracteristiques");
+								
+				// maintenant je crée une instance de article divers avec les données
+				// récupérées en BDD pour pouvoir l'utiliser
+				// je dois identifier s'il s'agit d'un article matériel ou non
+
+				if (format.equals("")){
+					articleDivers = new ArticleDivers(ref, prix, nom, url_image, stock, etat, type_article_divers, caracteristiques);
+				} else {
+					articleDivers = new ArticleDivers(ref, prix, nom, url_image, format, url_download, type_article_divers, caracteristiques);
+				} // if else
+			
+			// je remplis les attribut non obligatoires (non définis dans le constructeur)
+			articleDivers.setDescription(description);
+			
+			// j'ajoute le livre dans mon catalogue
+			catalogue.add(articleDivers);
+			
+			} // while articleDivers next
+
+			
+			
+			
 			
 		
-		}
+		} //try de la connexion
 		catch (Exception ex) {
 			ex.printStackTrace();
 		} // try catch

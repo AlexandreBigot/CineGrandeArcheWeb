@@ -43,25 +43,28 @@
 			<div id="formCreationCOmpte" class="contenuHeaderArticle">
 				<br/>
 				<form action="ControlerCompte" method="post">
-					<label for="nom">Nom* :</label>
+					<label for="nom">Nom :</label>
 					<input type="text" name="nom"/>
 					<br/><br/>
-					<label for="prenom">Prénom* :</label>
+					<label for="prenom">Prénom :</label>
 					<input type="text" name="prenom"/>
 					<br/><br/>
 					<label for="adresse">Adresse :</label>
 					<input type="text" name="prenom"/>
 					<br/><br/>
-					<label for="email">Adresse email :</label>
+					<label for="adresse">Adresse livraison :</label>
+					<input type="text" name="prenom"/>
+					<br/><br/>
+					<label for="email">Email :</label>
 					<input type="email" name="email"/>
 					<br/><br/>
 					<label for="telephone">Téléphone :</label>
 					<input type="tel" name="telephone"/>
 					<br/><br/>
-					<label for="password">Mot de passe* :</label>
+					<label for="password">Mot de passe :</label>
 					<input type="password" name="password"/>
 					<br/><br/>
-					<label for="testPassword">Confirmez votre mot de passe* :</label>
+					<label for="testPassword">Confirmez votre mot de passe :</label>
 					<input type="password" name="testPassword"/>
 					<!-- à changer pour ${creationPasswordTest} par défaut-->
 					<c:if test="${!creationPasswordTest}">

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSessionListener;
 
 import fr.demos.formation.poe.cinegrandearche.data.ArticleDAOMySql;
 import fr.demos.formation.poe.cinegrandearche.metier.Article;
+import fr.demos.formation.poe.cinegrandearche.metier.Compte;
 import fr.demos.formation.poe.cinegrandearche.metier.Panier;
 
 @WebListener
@@ -39,11 +40,10 @@ public class ListenerPanier implements HttpSessionListener {
     	String jspCourante = "/Articles.jsp";
     	arg0.getSession().setAttribute("jspCourante", jspCourante);
     	
-    	// a gérer dans Compte.java puis instancier un compte et le récupérer
-    	boolean connecteAuCompte = false;
-    	arg0.getSession().setAttribute("connecteAuCompte", connecteAuCompte);
-
-
+    	// Je mets compte dans la session
+    	// si compte null je ne suis pas connecté
+    	Compte compte = null;
+    	arg0.getSession().setAttribute("compteSession", compte);
 
     	
     }

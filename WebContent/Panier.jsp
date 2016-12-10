@@ -21,20 +21,24 @@
 		<div class="titrePanier">
 			<br />
 			<div id="titreVotrePanier" class="enTetePanier">
+			<br>
 			VOTRE PANIER
 			</div>
 			<div id="boutonAcheter" class="enTetePanier">
-			<c:if test="${panier.getSizeContenuPanier() > 0}">
-			<form id="acheter" action="ControlerPanier" method="post">
-				<input type=submit value="Acheter" name="action" />
-			</form>
+			<c:if test="${connecteAuCompte}">
+				<c:if test="${panier.getSizeContenuPanier() > 0}">
+				<form id="acheter" action="ControlerPanier" method="post">
+					<input type=submit value="Acheter" name="action" />
+				</form>
+				</c:if>
 			</c:if>
+			
 			</div>
 			<br/>
 			<c:if test="${panier.getSizeContenuPanier() == 0}">
-			<br/>
+			<br>
 			</c:if>
-			
+			<br>
 			</div>
 			<br/>
 			
@@ -57,7 +61,6 @@
 						<div class="infosArticle">
 							<ul>
 								<li>${ligne.article.nom}</li>
-								<li>Auteur : ${ligne.article.auteur}</li>
 								<li>Prix HT : <fmt:formatNumber
 										value="${ligne.article.prixHt}" minFractionDigits="2" /> €
 								</li>
@@ -71,7 +74,6 @@
 						<div class="infosArticle">
 							<ul>
 								<li>${ligne.article.nom}</li>
-								<li>Auteur : ${ligne.article.auteur}</li>
 								<li>Etat : ${ligne.article.materiel.etat}</li>
 								<li>Prix HT : <fmt:formatNumber
 										value="${ligne.article.prixHt}" minFractionDigits="2" /> €
@@ -96,13 +98,6 @@
 
 		<br>
 		<br>
-		<div >
-			<br/>
-			<form id="acheter" action="ControlerPanier" method="post">
-				<input type=submit value="Acheter" name="action" />
-			</form>
-		</div>
-	
 
 	</div>
 </body>

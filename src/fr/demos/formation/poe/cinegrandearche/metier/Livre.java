@@ -13,7 +13,7 @@ public class Livre extends Article {
 	// constructeur livre dématérialisé
 	public Livre(String argRef, double argPrixHt, String argNom, String argUrlImage, String argFormat, String argUrlDownload, String argAuteur,
 			String argIsbn, String argEditeur, String argGenre) {
-		super(argRef, argPrixHt, argNom, argUrlImage, argFormat, argUrlDownload);
+		super(argRef, argPrixHt, argNom, argUrlImage, argFormat, argUrlDownload, TypeArticle.LIVRE);
 		this.auteur = argAuteur;
 		this.isbn = argIsbn;
 		this.editeur = argEditeur;
@@ -23,7 +23,7 @@ public class Livre extends Article {
 	// constructeur livre matérialisé neuf
 	public Livre(String argRef, double argPrixHt, String argNom, String argUrlImage, int argStock, String argAuteur,
 			String argIsbn, String argEditeur, String argGenre) {
-		super(argRef, argPrixHt, argNom, argUrlImage, argStock);
+		super(argRef, argPrixHt, argNom, argUrlImage, argStock, TypeArticle.LIVRE);
 		this.auteur = argAuteur;
 		this.isbn = argIsbn;
 		this.editeur = argEditeur;
@@ -33,7 +33,7 @@ public class Livre extends Article {
 	// constructeur livre matérialisé non neuf
 	public Livre(String argRef, double argPrixHt, String argNom, String argUrlImage, int argStock,  Etat argEtat, String argAuteur,
 			String argIsbn, String argEditeur, String argGenre) {
-		super(argRef, argPrixHt, argNom, argUrlImage, argStock, argEtat);
+		super(argRef, argPrixHt, argNom, argUrlImage, argStock, argEtat, TypeArticle.LIVRE);
 		this.auteur = argAuteur;
 		this.isbn = argIsbn;
 		this.editeur = argEditeur;

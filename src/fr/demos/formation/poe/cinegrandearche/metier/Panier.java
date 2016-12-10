@@ -9,7 +9,7 @@ import fr.demos.formation.poe.cinegrandearche.exceptions.ExceptionRetirerArticle
 
 public class Panier implements Iterable<LignePanier> {
 	
-//	private Compte compte;
+	private Compte compte;
 //	relier un panier à une session ou un compte
 	private ArrayList<LignePanier> lignesPanier = new ArrayList<LignePanier>();
 	
@@ -186,4 +186,15 @@ public class Panier implements Iterable<LignePanier> {
 		// TODO Auto-generated method stub
 		return lignesPanier.iterator();
 	}
+
+	public Compte getCompte() {
+		return compte;
+	}
+
+	public void setCompte(Compte compte) {
+		this.compte = compte;
+	}
+	
+	
+	
 }// class
