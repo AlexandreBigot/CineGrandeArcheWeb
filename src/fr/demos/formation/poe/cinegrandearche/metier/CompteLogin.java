@@ -1,7 +1,6 @@
 package fr.demos.formation.poe.cinegrandearche.metier;
 
 import fr.demos.formation.poe.cinegrandearche.data.CompteDAOMySql;
-import fr.demos.formation.poe.cinegrandearche.exceptions.ExceptionPasswordFail;
 
 public class CompteLogin {
 	
@@ -14,7 +13,6 @@ public class CompteLogin {
 			compteDAOMySql = new CompteDAOMySql();
 			compteRetourne = compteDAOMySql.select(identifiantEmail, password);
 
-		
 		return compteRetourne;
 		// si retourne null erreur password ou email
 	}	

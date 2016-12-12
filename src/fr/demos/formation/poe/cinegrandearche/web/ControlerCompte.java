@@ -77,21 +77,21 @@ public class ControlerCompte extends HttpServlet {
 			// je crée un objet pour tester ma connexion au compte
 			CompteLogin compteLogin = new CompteLogin();
 			
-			// j'eappelle la méthode pour me connecter avec les infos saisies dans la vue
+			// j'appelle la méthode pour me connecter avec les infos saisies dans la vue
+			// et me retourner un compte ou null
 			try {
 				Compte compteConnecte = compteLogin.getCompteSiConnexionReussie(email, password);
-				System.out.println("j'ai créé un compte");
 		    	session.setAttribute("compteSession", compteConnecte);
-				System.out.println("j'ai mis le compte dans la session");
+				if(compteConnecte == null){
+					System.out.println("mon compteSession est null : " + compteConnecte);
+			    	String messageErreurConnexion = "Echec connexion";
+			    	request.setAttribute("messageErreurConnexion", messageErreurConnexion);
+			    	// déclencher un message mauvais identifiant ou email, exception ou pas ? pas de sortie en erreur...
+				} //if
 
 	
 			} catch (Exception e) {
-				System.out.println("exception");
-
-				ExceptionPasswordFail exceptionPasswordFail = new ExceptionPasswordFail("Erreur mot de passe ou email");
-				// je mets à disposition le message en EL pour la requete
-				request.setAttribute("messageExceptionPasswordFail", exceptionPasswordFail);		
-			
+				System.out.println("exception connexion datasource SQL dans select(String email, String password) de CompteDAOMySql");			
 			}
 			
 			//méthode bourrin avant d'avoir un compte
@@ -119,16 +119,28 @@ public class ControlerCompte extends HttpServlet {
 		if (session.getAttribute("compteSession") != null && action != null && action.equals("Se déconnecter")) {
 
 			// je déconnecte
-			// plus tard il faudra sauvegarder le panier pour la prochaine connection
 			// je redéfini la valeur de ma variable
 			// il fait de l'autoboxing donc pas besoin de luimettre un objet  mais la valeur compatible avec le type
 			session.setAttribute("compteSession", null);
 			
 			// je récupère la requête et je renvoie vers la JSP
+			// mais si je me déconnecte dans la page gestion de compte je dois changer de page !
+			if (session.getAttribute("jspCourante").equals("/GestionCompte.jsp")){
+
+				// on va dire qu'on retourne à l'acceuil après une déconnexion du compte
+				RequestDispatcher rd = request.getRequestDispatcher("/Articles.jsp");
+				rd.forward(request, response);
+
+				//je renseigne la nouvelle jsp courante après chaque rd.forward (la même que le forward)
+		    	String jspCourante = "/Articles.jsp";
+		    	session.setAttribute("jspCourante", jspCourante);
+				
+			} else {
 			String uriCible = (String)session.getAttribute("jspCourante");
 			RequestDispatcher rd = request.getRequestDispatcher(uriCible);
 			rd.forward(request, response);
 			// pas besoin de changer le jspCourante car c'est la même
+			}
 			
 		} // if bouton Se déconnecter
 

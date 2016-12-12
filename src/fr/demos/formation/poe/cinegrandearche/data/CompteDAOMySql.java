@@ -62,22 +62,33 @@ public class CompteDAOMySql implements CompteDAO {
 			
 			// stockage de mon compte pour le parcourrir
 			ResultSet rs = contexteRequeteConnexionCompte.executeQuery();
-		
-			// pas besoin de while next car un seul élément
-			// le rs.first sélectionne le premier objet trouvé
-			rs.first();
+			System.out.println("execute query lancé");
+
+			// si mon resultset est vide
+			if (!rs.first()) {
+				System.out.println("rs.next vide");
+				// rien à faire compte (qu'on va retourner) est déjà null par défaut
+				
+			} else { // si pas vide
 			
-			// je récupère les données dans des variables
-			String nom = rs.getString("nom");
-			String prenom = rs.getString("prenom");
-			String adresse_compte = rs.getString("adresse_compte");
-			String adresse_livraison = rs.getString("adresse_livraison");
-			String emailCompte = rs.getString("email");
-			String telephone = rs.getString("telephone"); 
-			String passwordCompte = rs.getString("password");
+				// pas besoin de while next car un seul élément
+				// le rs.first sélectionne le premier objet trouvé
+				rs.first();
+				System.out.println("rs.first effectué");
+				
+				// je récupère les données dans des variables
+				String nom = rs.getString("nom");
+				String prenom = rs.getString("prenom");
+				String adresse_compte = rs.getString("adresse_compte");
+				String adresse_livraison = rs.getString("adresse_livraison");
+				String emailCompte = rs.getString("email");
+				String telephone = rs.getString("telephone"); 
+				String passwordCompte = rs.getString("password");
+
+				// création ocmpte avec les infos récupérées
+				compte = new Compte(nom, prenom, adresse_compte, adresse_livraison, emailCompte, telephone, passwordCompte);
+			}// if else rs.first vide ou pas
 			
-			// création ocmpte avec les infos récupérées
-			compte = new Compte(nom, prenom, adresse_compte, adresse_livraison, emailCompte, telephone, passwordCompte);
 						
 		} // try de la connexion 
 		catch (SQLException e) {

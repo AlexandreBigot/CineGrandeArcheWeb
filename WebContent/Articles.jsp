@@ -15,7 +15,16 @@
 		<header>
 			<jsp:include page="/Menu.jsp"></jsp:include>
 		</header>
-		<br /> <br />
+
+		<c:if test="${empty catalogue}">
+			<div class="article">
+				<br/><br/><br/>
+				<div class="headerArticle">
+				<p class="pPanier">Aucun résultat trouvé pour la recherche "${critereRecherche}"</p>
+				</div>
+				<br/><br/><br/>
+			</div>
+		</c:if>
 
 		<c:forEach var="article" items="${catalogue}">
 			<div class="article">

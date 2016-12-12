@@ -87,7 +87,9 @@ public class ControlerArticles extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-			
+			//je mets le critère de recherche dans la requete pour le cas où on ne trouve rien
+			String critereRecherche = request.getParameter("recherche");
+			session.setAttribute("critereRecherche", critereRecherche);
 			// je récupère la requête et je renvoie vers la JSP courante
 			String uriCible = (String)session.getAttribute("jspCourante");
 			RequestDispatcher rd = request.getRequestDispatcher(uriCible);

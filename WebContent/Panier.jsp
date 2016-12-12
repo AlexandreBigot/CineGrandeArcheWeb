@@ -16,31 +16,21 @@
 		<header id="headerPanier">
 			<jsp:include page="/Menu.jsp"></jsp:include>
 		</header>
-		<br /> <br />
-
+		
+		<div class="parentFlex">
 		<div class="titrePanier">
-			<br />
-			<div id="titreVotrePanier" class="enTetePanier">
-			<br>
+			<div id="titreVotrePanier">
 			VOTRE PANIER
 			</div>
-			<div id="boutonAcheter" class="enTetePanier">
-			<c:if test="${connecteAuCompte}">
-				<c:if test="${panier.getSizeContenuPanier() > 0}">
-				<form id="acheter" action="ControlerPanier" method="post">
-					<input type=submit value="Acheter" name="action" />
-				</form>
-				</c:if>
+			<c:if test="${panier.getSizeContenuPanier() > 0}">
+				<div id="boutonAcheter" class="enTetePanier">
+					<form id="acheter" action="ControlerPanier" method="post">
+						<input type=submit value="Acheter" name="action" />
+					</form>
+				</div>
 			</c:if>
-			
-			</div>
-			<br/>
-			<c:if test="${panier.getSizeContenuPanier() == 0}">
-			<br>
-			</c:if>
-			<br>
-			</div>
-			<br/>
+		</div>
+		</div>
 			
 		<c:if test="${panier.getSizeContenuPanier() == 0}">
 		<br/>
@@ -54,19 +44,18 @@
 		<br/>
 		</c:if>
 		
-		<c:forEach var="ligne" items="${panier.iterator()}">
-			<div class="articlePanier">
-				<div class="headerArticle">
-					<c:if test="${empty ligne.article.materiel}">
-						<div class="infosArticle">
-							<ul>
-								<li>${ligne.article.nom}</li>
-								<li>Prix HT : <fmt:formatNumber
-										value="${ligne.article.prixHt}" minFractionDigits="2" /> €
-								</li>
-								<li>Format numérique : ${ligne.article.immateriel.format}</li>
-							</ul>
-						</div>
+		<c:if test="${panier.getSizeContenuPanier() > 0}">
+			<c:forEach var="ligne" items="${panier.iterator()}">
+				<div class="articlePanier">
+					<div class="headerArticle">
+						<c:if test="${empty ligne.article.materiel}">
+							<div class="infosArticle">
+								<ul>
+									<li>${ligne.article.nom}</li>
+									<li>Prix HT : <fmt:formatNumber	value="${ligne.article.prixHt}" minFractionDigits="2"/> €</li>
+									<li>Format numérique : ${ligne.article.immateriel.format}</li>
+								</ul>
+							</div>
 					</c:if>
 
 					<!-- si article matériel -->
@@ -95,9 +84,10 @@
 				</div>
 			</div>
 		</c:forEach>
+		</c:if>
 
-		<br>
-		<br>
+		<br/>
+		<br/>
 
 	</div>
 </body>

@@ -76,6 +76,7 @@ public class ArticleDAOMySql implements ArticleDAO {
 				contexteRequeteLivre = cx.prepareStatement(
 				"SELECT * FROM Livre JOIN Article ON Livre.reference_livre=Article.reference_article "
 				+ "WHERE upper(Article.reference_article) LIKE ? "
+				+ "OR upper(Article.prix) LIKE ? "				
 				+ "OR upper(Article.nom) LIKE ? "
 				+ "OR upper(Article.description) LIKE ? "
 				+ "OR upper(Article.type_article) LIKE ? "
@@ -85,6 +86,7 @@ public class ArticleDAOMySql implements ArticleDAO {
 				+ "OR upper(Livre.isbn) LIKE ? "
 				+ "OR upper(Livre.editeur) LIKE ? "
 				+ "OR upper(Livre.genre) LIKE ? "
+				+ "OR upper(Livre.date) LIKE ? "				
 				+ "ORDER BY Article.nom ASC");
 
 				// je renseigne les valeurs des "?"
@@ -98,12 +100,14 @@ public class ArticleDAOMySql implements ArticleDAO {
 				contexteRequeteLivre.setString(8, critereSQL);
 				contexteRequeteLivre.setString(9, critereSQL);
 				contexteRequeteLivre.setString(10, critereSQL);
-
+				contexteRequeteLivre.setString(11, critereSQL);
+				contexteRequeteLivre.setString(12, critereSQL);
 				
 // ##### Article divers #####				
 				contexteRequeteArticleDivers = cx.prepareStatement(
 				"SELECT * FROM Article_divers JOIN Article ON Article_divers.reference_article_divers=Article.reference_article "
 				+ "WHERE upper(Article.reference_article) LIKE ? "
+				+ "OR upper(Article.prix) LIKE ? "				
 				+ "OR upper(Article.nom) LIKE ? "
 				+ "OR upper(Article.description) LIKE ? "
 				+ "OR upper(Article.type_article) LIKE ? "
@@ -122,7 +126,7 @@ public class ArticleDAOMySql implements ArticleDAO {
 				contexteRequeteArticleDivers.setString(6, critereSQL);
 				contexteRequeteArticleDivers.setString(7, critereSQL);
 				contexteRequeteArticleDivers.setString(8, critereSQL);
-		
+				contexteRequeteArticleDivers.setString(9, critereSQL);
 				
 			}// if else
 			

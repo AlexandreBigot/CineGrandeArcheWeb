@@ -8,12 +8,13 @@ body{
 /* centrage du site*/
 .divbody{
 	max-width:960px;
+	min-height: 600px;
 	margin:auto;
+	margin-bottom: 20px;
 	background-color: white;
 	padding: 20px;
 	border-radius: 10px;
-	box-shadow:#464040 0px 0px 15px;
-	
+	box-shadow:#464040 0px 0px 15px;	
 }
 
 li{
@@ -25,38 +26,39 @@ header{
 	justify-content: space-around;
 }
 
-#headerPanier{
+.parentFlex{
+	display: flex;
+	
 }
 
 .titrePanier{
+	display: flex;	
 	width: 100%;
-	text-align: center;
+	height: 50px;
 	border-top: darkred solid 2px;
 	border-bottom: darkred solid 2px;
-	display: flex;	
+	justify-content: space-between;
+	align-items: center;
 }
 
-.enTetePanier{
+#titreCompte{
 	justify-content: center;
-}
-
-#titreVotrePanier{
-}
-
-#boutonAcheter{
 }
 
 .menuVertical{
 	width: 100%;
+	height: 110px;
 	display: flex;
 	flex-direction: column;
-		
+	justify-content: space-between;
+			
 }
 
 .menuHorizontal{
 	width: 100%;
 	display: flex;
 	justify-content: space-around;
+	align-items: flex-start;
 		
 }
 
@@ -65,32 +67,37 @@ header{
 	justify-content: space-around;
 }
 
-.titrePanier{
-	display: flex;
-	justify-content: stretch;
-	
-	
+#formConnectionCompte{
+	justify-content: space-between;
+}
+
+#divBoutonDeconnecter{
+	width: 156px;
+}
+
+#boutonConnexion{
+	margin-bottom: 5px;
+}
+
+#elementMenuContenuPanier{
+	margin-bottom: 20px;
+}
+
+#rechercheArticleMenu{
+	margin-bottom: 15px;
 }
 
 .pPanier{
-	text-align: center;
-	font-size: 1.4em;
-}
-
-.pPassword{
-	color: red;
-	font-size: bold;
-
+	font-size: 1.2em;
 }
 
 .article{
 	border-top: darkred solid 2px;	
 }
 
-.
 
 .articlePanier{
-	border-top: darkgrey solid 2px;	
+	border-bottom: darkgrey solid 2px;	
 }
 
 
@@ -129,4 +136,7 @@ header{
 	flex-direction: column;
 }
 
-
+textarea{
+	resize:none;
+	width: 250px;
+}

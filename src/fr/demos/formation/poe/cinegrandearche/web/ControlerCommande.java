@@ -34,8 +34,13 @@ public class ControlerCommande extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+
+	// if bouton valider commande
+	// test siconnecté ou non, il faut être connecteé pour commander	
+	
+	
+	
+	
 	}
 
 }

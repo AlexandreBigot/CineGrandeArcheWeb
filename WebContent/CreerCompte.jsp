@@ -16,17 +16,14 @@
 		<header id="headerPanier">
 			<jsp:include page="/Menu.jsp"></jsp:include>
 		</header>
-		<br /> <br />
 
 		<div class="titrePanier">
-			<br />
-			Créez votre compte utilisateur
-			<br/><br/>
+			<p id="titreCompte">Créez votre compte utilisateur</p>
 			</div>
 			<br/>
 			
 		<!-- si connecté à un compte -->	
-		<c:if test="${connecteAuCompte}">
+		<c:if test="${not empty compteSession}">
 		<br/>
 		<br/>
 		<br/>
@@ -39,8 +36,8 @@
 		</c:if>
 		
 		<!-- si non connecté à un compte -->
-		<c:if test="${!connecteAuCompte}">
-			<div id="formCreationCOmpte" class="contenuHeaderArticle">
+		<c:if test="${empty compteSession}">
+			<div id="formCreationCompte" class="contenuHeaderArticle">
 				<br/>
 				<form action="ControlerCompte" method="post">
 					<label for="nom">Nom :</label>
@@ -50,10 +47,12 @@
 					<input type="text" name="prenom"/>
 					<br/><br/>
 					<label for="adresse">Adresse :</label>
-					<input type="text" name="prenom"/>
+					<br/>
+					<textarea name="adresseCompte" rows=5 cols=50></textarea>
 					<br/><br/>
 					<label for="adresse">Adresse livraison :</label>
-					<input type="text" name="prenom"/>
+					<br/>
+					<textarea type="text" name="adresseLivraison" rows=5 cols=50></textarea>
 					<br/><br/>
 					<label for="email">Email :</label>
 					<input type="email" name="email"/>
@@ -70,73 +69,14 @@
 					<c:if test="${!creationPasswordTest}">
 						<p class="pPassword">Vous avez entré des mots de passe différents
 						</p>
-						</c:if>
+					</c:if>
 					<br/><br/>
-
-
 					<br/><br/>
 					<br/><br/>
 					<input type=submit value="Valider" name="action" />
-				
-					</form>
+				</form>
 			</div>
-		
-		
-		
-		
-		</c:if>
-		
-		
-		
-		<c:forEach var="ligne" items="${panier.iterator()}">
-			<div class="articlePanier">
-				<div class="headerArticle">
-					<c:if test="${empty ligne.article.materiel}">
-						<div class="infosArticle">
-							<ul>
-								<li>${ligne.article.nom}</li>
-								<li>Auteur : ${ligne.article.auteur}</li>
-								<li>Prix HT : <fmt:formatNumber
-										value="${ligne.article.prixHt}" minFractionDigits="2" /> €
-								</li>
-								<li>Format numérique : ${ligne.article.immateriel.format}</li>
-							</ul>
-						</div>
-					</c:if>
-
-					<!-- si article matériel -->
-					<c:if test="${empty ligne.article.immateriel}">
-						<div class="infosArticle">
-							<ul>
-								<li>${ligne.article.nom}</li>
-								<li>Auteur : ${ligne.article.auteur}</li>
-								<li>Etat : ${ligne.article.materiel.etat}</li>
-								<li>Prix HT : <fmt:formatNumber
-										value="${ligne.article.prixHt}" minFractionDigits="2" /> €
-								</li>
-								<li>Quantité disponible : ${ligne.article.stock}</li>
-							</ul>
-						</div>
-					</c:if>
-					<div id="formModifierPanier" class="contenuHeaderArticle">
-					<br/>
-						<form action="ControlerPanier" method="post">
-							<input type="hidden" value="${ligne.article.ref}" name="refArticle">
-							<label for="nom">Quantité :</label>
-							<input class="champsAjoutPanier" type="number" value="${ligne.getQuantite()}" min="1" name="quantiteDansPanier"/>
-							<input type=submit value="Modifier" name="action" />
-							<input type=submit value="Supprimer" name="action" />
-						</form>
-					</div>
-				</div>
-			</div>
-
-
-
-		</c:forEach>
-
-
-
+		</c:if>		
 	</div>
 </body>
 </html>
