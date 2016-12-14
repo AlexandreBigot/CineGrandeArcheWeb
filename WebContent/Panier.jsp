@@ -56,23 +56,28 @@
 									<li>Format numérique : ${ligne.article.immateriel.format}</li>
 								</ul>
 							</div>
-					</c:if>
+						</c:if>
 
-					<!-- si article matériel -->
-					<c:if test="${empty ligne.article.immateriel}">
-						<div class="infosArticle">
-							<ul>
+						<!-- si article matériel -->
+						<c:if test="${empty ligne.article.immateriel}">
+							<div class="infosArticle">
+								<ul>
 								<li>${ligne.article.nom}</li>
 								<li>Etat : ${ligne.article.materiel.etat}</li>
 								<li>Prix HT : <fmt:formatNumber
-										value="${ligne.article.prixHt}" minFractionDigits="2" /> €
-								</li>
+										value="${ligne.article.prixHt}" minFractionDigits="2" /> €</li>
 								<li>Quantité disponible : ${ligne.article.stock}</li>
-							</ul>
-						</div>
-					</c:if>
-					<div id="formModifierPanier" class="contenuHeaderArticle">
-					<br/>
+								<c:if test="${referenceArticlePanier == ligne.article.ref}">
+									<li class="messageException">
+									${ExceptionQuantiteDemandeeSuperieureAuStock}
+									</li>
+								</c:if>
+								</ul>
+							</div>
+						</c:if>
+					
+						<div class="contenuHeaderArticle">
+						<br/>
 						<form action="ControlerPanier" method="post">
 							<input type="hidden" value="${ligne.article.ref}" name="refArticle">
 							<label for="nom">Quantité :</label>
@@ -80,10 +85,10 @@
 							<input type=submit value="Modifier" name="action" />
 							<input type=submit value="Supprimer" name="action" />
 						</form>
+						</div>
 					</div>
 				</div>
-			</div>
-		</c:forEach>
+			</c:forEach>
 		</c:if>
 
 		<br/>

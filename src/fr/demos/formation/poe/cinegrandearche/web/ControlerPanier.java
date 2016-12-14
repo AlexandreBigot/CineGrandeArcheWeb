@@ -13,8 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import fr.demos.formation.poe.cinegrandearche.exceptions.ExceptionQuantiteDemandeeSuperieureAuStock;
 import fr.demos.formation.poe.cinegrandearche.metier.Article;
-import fr.demos.formation.poe.cinegrandearche.metier.LignePanier;
-import fr.demos.formation.poe.cinegrandearche.metier.Livre;
 import fr.demos.formation.poe.cinegrandearche.metier.Panier;
 
 @WebServlet("/ControlerPanier")
@@ -28,10 +26,6 @@ public class ControlerPanier extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		
-		System.out.println("on viens de faire un doGet sur panier.jsp");
-
 		
 		// j'identifie et je stocke la session actuelle
 		HttpSession session = request.getSession();
@@ -149,7 +143,20 @@ public class ControlerPanier extends HttpServlet {
 			Panier p = (Panier) session.getAttribute("panier");
 
 			// appel méthode modifier quantite ligne panier
-			p.modifierQuantiteLignePanier(refArticleLigne, intQuantiteModifiee);
+			try {
+				p.modifierQuantiteLignePanier(refArticleLigne, intQuantiteModifiee);
+			} catch (ExceptionQuantiteDemandeeSuperieureAuStock e) {
+				String message = e.getMessage();
+				int quantiteStock = e.getQuantiteStock();
+				// je mets les éléments du message dans une variable
+				// unique pour la mettre en argument du setAttribute
+				String messageExceptionQDSAS = message + quantiteStock;
+				// je mets à disposition le message en EL pour la requete
+				request.setAttribute("ExceptionQuantiteDemandeeSuperieureAuStock", messageExceptionQDSAS);
+				// je mets dans la session la référence de l'article mis
+				// dans le panier pour n'afficher l'exception que pour l'article concerné
+				session.setAttribute("referenceArticlePanier", refArticleLigne);
+			}
 			
 			// je récupère la requête et je renvoie vers la JSP
 			RequestDispatcher rd = request.getRequestDispatcher("/Panier.jsp");
@@ -159,7 +166,7 @@ public class ControlerPanier extends HttpServlet {
 	    	String jspCourante = "/Panier.jsp";
 	    	session.setAttribute("jspCourante", jspCourante);
 	    	
-		} // si on clique sur voir le panier
+		} // si on clique sur modifier
 
 		
 		

@@ -4,6 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div class="menuVertical">
+	<div class="titreSite">
+		<div>
+			<p>Ciné Grande Arche - Votre librairie cinéphile</p>
+		</div>
+	</div>
 	<div class="menuHorizontal">
 	
 		<!-- si non connecté à un compte -->

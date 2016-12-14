@@ -67,9 +67,7 @@ public class ControlerCompte extends HttpServlet {
 		// si on clique sur connection je me connecte
 		// TODO ??? : vérification nom utilisateur et mdp pour valider connection
 		if (action != null && action.equals("Connection")) {
-			
-			System.out.println("on a cliqué sur connexion");
-			
+						
 			// je récupère les email et password
 			String email = request.getParameter("email").toLowerCase();
 			String password = request.getParameter("password");
@@ -101,13 +99,8 @@ public class ControlerCompte extends HttpServlet {
 
 			// je récupère la requête et je renvoie vers la JSP
 			String uriCible = (String)session.getAttribute("jspCourante");
-			System.out.println("récupère jsp courante");
-
 			RequestDispatcher rd = request.getRequestDispatcher(uriCible);
-			System.out.println("requestDispatcher instancié");
-
 			rd.forward(request, response);
-			System.out.println("rd.forward lancé");
 
 			// pas besoin de changer le jspCourante car c'est la même
 		

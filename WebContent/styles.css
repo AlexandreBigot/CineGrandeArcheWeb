@@ -8,7 +8,7 @@ body{
 /* centrage du site*/
 .divbody{
 	max-width:960px;
-	min-height: 600px;
+	min-height: 800px;
 	margin:auto;
 	margin-bottom: 20px;
 	background-color: white;
@@ -47,15 +47,29 @@ header{
 
 .menuVertical{
 	width: 100%;
-	height: 110px;
+	height: 200px;
+	font-weight: bold;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
-			
+	justify-content: space-between;		
+}
+
+.titreSite{
+	display: flex;
+	flex-direction: columnn;
+	justify-content: space-around;
+	align-items: center;
+	padding-bottom: 20px;	
+}
+
+.titreSite p {
+	font-size: 1.9em;
+	color: darkred;
 }
 
 .menuHorizontal{
 	width: 100%;
+	height:60px;
 	display: flex;
 	justify-content: space-around;
 	align-items: flex-start;
@@ -92,18 +106,21 @@ header{
 }
 
 .article{
-	border-top: darkred solid 2px;	
+	border-top: darkred solid 2px;
+	display: flex;
+	flex-direction: column;
 }
-
 
 .articlePanier{
 	border-bottom: darkgrey solid 2px;	
 }
 
-
 .headerArticle{
 	display: flex;
 	justify-content: space-between;
+}
+
+.contenuHeaderArticle{
 }
 
 .champsAjoutPanier{
@@ -127,14 +144,14 @@ header{
 	margin: 10px;
 }
 
-.infosArticle{
-	width: 70%;
-}
+
 
 .descriptionArticle{
 	width: 90%;
 	flex-direction: column;
 }
+
+
 
 textarea{
 	resize:none;

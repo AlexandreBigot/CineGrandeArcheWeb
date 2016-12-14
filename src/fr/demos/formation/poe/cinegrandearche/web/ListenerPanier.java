@@ -22,6 +22,7 @@ public class ListenerPanier implements HttpSessionListener {
     	// je crée mon arrayList à partir de la BDD SQL
     	try {
 			ArticleDAOMySql articleDAOMySql = new ArticleDAOMySql();
+			
 			ArrayList<Article> catalogue = (ArrayList<Article>) articleDAOMySql.select("");
 			arg0.getSession().setAttribute("catalogue", catalogue);
 			

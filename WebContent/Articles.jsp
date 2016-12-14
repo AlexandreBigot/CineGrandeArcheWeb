@@ -42,9 +42,9 @@
 				</div>
 				<br/>
 				<c:if test="${referenceArticlePanier == article.ref}">
-				<div class="messageException">
-					${ExceptionQuantiteDemandeeSuperieureAuStock}
-				</div>
+				<span class="messageException">
+				<b>${ExceptionQuantiteDemandeeSuperieureAuStock}</b>
+				</span>
 				<br/>
 				</c:if>
 				<div class="imageEtInfos">

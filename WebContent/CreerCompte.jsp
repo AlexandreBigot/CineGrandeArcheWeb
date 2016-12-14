@@ -65,11 +65,6 @@
 					<br/><br/>
 					<label for="testPassword">Confirmez votre mot de passe :</label>
 					<input type="password" name="testPassword"/>
-					<!-- à changer pour ${creationPasswordTest} par défaut-->
-					<c:if test="${!creationPasswordTest}">
-						<p class="pPassword">Vous avez entré des mots de passe différents
-						</p>
-					</c:if>
 					<br/><br/>
 					<br/><br/>
 					<br/><br/>

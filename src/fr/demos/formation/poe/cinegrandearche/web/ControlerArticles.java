@@ -90,12 +90,16 @@ public class ControlerArticles extends HttpServlet {
 			//je mets le critère de recherche dans la requete pour le cas où on ne trouve rien
 			String critereRecherche = request.getParameter("recherche");
 			session.setAttribute("critereRecherche", critereRecherche);
-			// je récupère la requête et je renvoie vers la JSP courante
-			String uriCible = (String)session.getAttribute("jspCourante");
-			RequestDispatcher rd = request.getRequestDispatcher(uriCible);
+			
+			// je récupère la requête et je renvoie vers la JSP
+			RequestDispatcher rd = request.getRequestDispatcher("/Articles.jsp");
 			rd.forward(request, response);
-			// pas besoin de changer le jspCourante car c'est la même
-		
+
+			// je renseigne la nouvelle jsp courante après chaque rd.forward (la
+			// même que le forward)
+			String jspCourante = "/Articles.jsp";
+			session.setAttribute("jspCourante", jspCourante);
+			
 		}// if Rechercher
 
 		
