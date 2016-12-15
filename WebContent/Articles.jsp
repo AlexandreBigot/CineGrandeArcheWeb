@@ -114,9 +114,9 @@
 					</c:if>
 
 				</div>
-				<br /> Description : <br />
+				<br/><!-- Description : <br />-->
 				<div class="descriptionArticle">${article.description}</div>
-				<br />
+				<br/>
 			</div>
 		</c:forEach>
 

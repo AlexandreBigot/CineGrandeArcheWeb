@@ -120,7 +120,13 @@ header{
 	justify-content: space-between;
 }
 
-.contenuHeaderArticle{
+#nomArticle{
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+.messageException{
+	color: #DF0101;
 }
 
 .champsAjoutPanier{
